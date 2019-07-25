@@ -12,14 +12,27 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
+    let unsubscribeFromUserSnapshot;
+    const unsubscribe = auth.onAuthStateChanged(async user => {
+      if (user) {
+        const userRef = await createUserProfileDocument(user);
+
+        unsubscribeFromUserSnapshot = userRef.onSnapshot(snapshot => {
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data()
+          });
+        });
+      } else {
+        setCurrentUser(user);
+      }
     });
 
-    return () => unsubscribe();
+    return () => {
+      unsubscribeFromUserSnapshot();
+      unsubscribe();
+    };
   }, []);
-
-  console.log(currentUser);
 
   return (
     <div className="App">
