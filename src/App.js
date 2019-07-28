@@ -3,8 +3,9 @@ import { Switch, Route } from 'react-router-dom';
 
 import './assets/scss/material-kit-react.scss?v=1.7.0';
 
-import Header from './components/header/header.component';
-import Footer from 'components/footer/footer.component.jsx';
+import Header from 'components/header/header.component';
+import Footer from 'components/footer/footer.component';
+import HeaderLinks from 'components/header-links/header-links.component';
 
 import LandingPage from './pages/landing/landing.component';
 import AuthPage from './pages/auth/auth.component';
@@ -43,7 +44,7 @@ const App = () => {
         color="transparent"
         routes={[]}
         brand="Pocket Seychelles"
-        rightLinks={[]}
+        rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 400,
