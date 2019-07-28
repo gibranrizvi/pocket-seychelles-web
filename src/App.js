@@ -45,8 +45,8 @@ const App = () => {
         color="transparent"
         routes={[]}
         brand="Pocket Seychelles"
-        leftLinks={<HeaderLinks />}
-        leftLinks={<HeaderLinks />}
+        leftLinks={<HeaderLinks left />}
+        rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
           height: 240,

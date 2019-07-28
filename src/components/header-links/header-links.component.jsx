@@ -1,4 +1,6 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -21,8 +23,21 @@ import Button from 'components/custom-button/button.component.jsx';
 import headerLinksStyle from './header-links.styles';
 
 const HeaderLinks = ({ ...props }) => {
-  const { classes } = props;
-  return (
+  const { classes, left, history } = props;
+  return left ? (
+    <List className={classes.list}>
+      <ListItem className={classes.listItem}>
+        <Button
+          onClick={() => history.push('/discover')}
+          color="transparent"
+          target="_blank"
+          className={classes.navLink}
+        >
+          <CloudDownload className={classes.icons} /> Discover
+        </Button>
+      </ListItem>
+    </List>
+  ) : (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
         <CustomDropdown
@@ -98,4 +113,4 @@ const HeaderLinks = ({ ...props }) => {
   );
 };
 
-export default withStyles(headerLinksStyle)(HeaderLinks);
+export default withRouter(withStyles(headerLinksStyle)(HeaderLinks));
