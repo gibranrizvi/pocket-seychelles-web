@@ -24,7 +24,7 @@ function CustomInput({ ...props }) {
 
   var formControlClasses;
   if (formControlProps !== undefined) {
-    formControlClasses = `${formControlProps.className} ${classes.formControl}`;
+    formControlClasses = `${classes.formControl} ${formControlProps.className}`;
   } else {
     formControlClasses = classes.formControl;
   }

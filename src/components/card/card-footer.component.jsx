@@ -9,7 +9,10 @@ const CardFooter = ({ ...props }) => {
   const { classes, className, children, ...rest } = props;
 
   return (
-    <div className={classes.cardFooter} {...rest}>
+    <div
+      className={`${classes.cardFooter} ${className && className}`}
+      {...rest}
+    >
       {children}
     </div>
   );

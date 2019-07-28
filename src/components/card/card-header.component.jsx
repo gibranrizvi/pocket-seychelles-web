@@ -11,7 +11,8 @@ function CardHeader({ ...props }) {
   return (
     <div
       className={`${classes.cardHeader} ${color &&
-        classes[color + 'CardHeader']} ${plain && classes.cardHeaderPlain}`}
+        classes[color + 'CardHeader']} ${plain &&
+        classes.cardHeaderPlain} ${className && className}`}
       {...rest}
     >
       {children}

@@ -2,21 +2,19 @@ import React from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 
 // Core components
-// import Header from 'components/Header/Header.jsx';
-// import Footer from 'components/Footer/Footer.jsx';
-import GridContainer from 'components/Grid/GridContainer.jsx';
-import GridItem from 'components/Grid/GridItem.jsx';
-import Button from 'components/custom-button/button.component.jsx';
-// import HeaderLinks from 'components/Header/HeaderLinks.jsx';
-import Parallax from 'components/Parallax/Parallax.jsx';
+import GridContainer from 'components/grid/grid-container.component';
+import GridItem from 'components/grid/grid-item.component';
+import Button from 'components/custom-button/button.component';
+import Parallax from 'components/parallax/parallax.component';
+import ProductSection from './sections/product.component';
 
 // Import styles
-import landingPageStyle from 'assets/jss/material-kit-react/views/landingPage.jsx';
+import landingPageStyle from 'assets/jss/material-kit-react/views/landingPage';
 
 const LandingPage = ({ classes }) => {
   return (
     <div>
-      <Parallax filter image={require('assets/img/landing-bg.jpg')}>
+      <Parallax filter image={require('assets/img/bg.jpg')}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={6}>
@@ -40,14 +38,13 @@ const LandingPage = ({ classes }) => {
           </GridContainer>
         </div>
       </Parallax>
-      {/* <div className={classNames(classes.main, classes.mainRaised)}>
+      <div className={`${classes.main} ${classes.mainRaised}`}>
         <div className={classes.container}>
           <ProductSection />
-          <TeamSection />
-          <WorkSection />
+          {/* <TeamSection />
+          <WorkSection /> */}
         </div>
       </div>
-      <Footer /> */}
     </div>
   );
 };

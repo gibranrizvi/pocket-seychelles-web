@@ -1,20 +1,19 @@
+import React from 'react';
 
-import React from "react";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from '@material-ui/core/styles/withStyles';
 
 // @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
-import VerifiedUser from "@material-ui/icons/VerifiedUser";
-import Fingerprint from "@material-ui/icons/Fingerprint";
-// core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import InfoArea from "components/InfoArea/InfoArea.jsx";
+import Chat from '@material-ui/icons/Chat';
+import VerifiedUser from '@material-ui/icons/VerifiedUser';
+import Fingerprint from '@material-ui/icons/Fingerprint';
 
-import productStyle from "assets/jss/material-kit-react/views/landingPageSections/productStyle.jsx";
+// core components
+import GridContainer from 'components/grid/grid-container.component';
+import GridItem from 'components/grid/grid-item.component';
+import InfoArea from 'components/info-area/info-area.component';
+
+import productStyle from './product.styles';
 
 class ProductSection extends React.Component {
   render() {
@@ -68,9 +67,5 @@ class ProductSection extends React.Component {
     );
   }
 }
-
-ProductSection.propTypes = {
-  classes: PropTypes.object
-};
 
 export default withStyles(productStyle)(ProductSection);

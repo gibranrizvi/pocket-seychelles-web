@@ -36,7 +36,8 @@ const RegularButton = React.forwardRef((props, ref) => {
         classes[color]} ${round && classes.round} ${fullWidth &&
         classes.fullWidth} ${disabled && classes.disabled} ${simple &&
         classes.simple} ${block && classes.block} ${link &&
-        classes.link} ${justIcon && classes.justIcon}`}
+        classes.link} ${justIcon && classes.justIcon} ${className &&
+        className}`}
     >
       {children}
     </Button>

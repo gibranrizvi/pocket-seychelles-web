@@ -1,27 +1,26 @@
-
-import React from "react";
+import React from './node_modules/react';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from './node_modules/prop-types';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from './node_modules/classnames';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
+import withStyles from './node_modules/@material-ui/core/styles/withStyles';
 
 // @material-ui/icons
 
 // core components
-import GridContainer from "components/Grid/GridContainer.jsx";
-import GridItem from "components/Grid/GridItem.jsx";
-import Button from "components/CustomButtons/Button.jsx";
-import Card from "components/Card/Card.jsx";
-import CardBody from "components/Card/CardBody.jsx";
-import CardFooter from "components/Card/CardFooter.jsx";
+import GridContainer from './node_modules/components/Grid/GridContainer.jsx.js';
+import GridItem from './node_modules/components/Grid/GridItem.jsx.js';
+import Button from './node_modules/components/CustomButtons/Button.jsx.js';
+import Card from './node_modules/components/Card/Card.jsx.js';
+import CardBody from './node_modules/components/Card/CardBody.jsx.js';
+import CardFooter from './node_modules/components/Card/CardFooter.jsx.js';
 
-import teamStyle from "assets/jss/material-kit-react/views/landingPageSections/teamStyle.jsx";
+import teamStyle from './node_modules/assets/jss/material-kit-react/views/landingPageSections/teamStyle.jsx.js';
 
-import team1 from "assets/img/faces/avatar.jpg";
-import team2 from "assets/img/faces/christian.jpg";
-import team3 from "assets/img/faces/kendall.jpg";
+import team1 from 'assets/img/faces/avatar.jpg';
+import team2 from 'assets/img/faces/christian.jpg';
+import team3 from 'assets/img/faces/kendall.jpg';
 
 class TeamSection extends React.Component {
   render() {
@@ -60,21 +59,21 @@ class TeamSection extends React.Component {
                     color="transparent"
                     className={classes.margin5}
                   >
-                    <i className={classes.socials + " fab fa-twitter"} />
+                    <i className={classes.socials + ' fab fa-twitter'} />
                   </Button>
                   <Button
                     justIcon
                     color="transparent"
                     className={classes.margin5}
                   >
-                    <i className={classes.socials + " fab fa-instagram"} />
+                    <i className={classes.socials + ' fab fa-instagram'} />
                   </Button>
                   <Button
                     justIcon
                     color="transparent"
                     className={classes.margin5}
                   >
-                    <i className={classes.socials + " fab fa-facebook"} />
+                    <i className={classes.socials + ' fab fa-facebook'} />
                   </Button>
                 </CardFooter>
               </Card>
@@ -103,14 +102,14 @@ class TeamSection extends React.Component {
                     color="transparent"
                     className={classes.margin5}
                   >
-                    <i className={classes.socials + " fab fa-twitter"} />
+                    <i className={classes.socials + ' fab fa-twitter'} />
                   </Button>
                   <Button
                     justIcon
                     color="transparent"
                     className={classes.margin5}
                   >
-                    <i className={classes.socials + " fab fa-linkedin"} />
+                    <i className={classes.socials + ' fab fa-linkedin'} />
                   </Button>
                 </CardFooter>
               </Card>
@@ -139,21 +138,21 @@ class TeamSection extends React.Component {
                     color="transparent"
                     className={classes.margin5}
                   >
-                    <i className={classes.socials + " fab fa-twitter"} />
+                    <i className={classes.socials + ' fab fa-twitter'} />
                   </Button>
                   <Button
                     justIcon
                     color="transparent"
                     className={classes.margin5}
                   >
-                    <i className={classes.socials + " fab fa-instagram"} />
+                    <i className={classes.socials + ' fab fa-instagram'} />
                   </Button>
                   <Button
                     justIcon
                     color="transparent"
                     className={classes.margin5}
                   >
-                    <i className={classes.socials + " fab fa-facebook"} />
+                    <i className={classes.socials + ' fab fa-facebook'} />
                   </Button>
                 </CardFooter>
               </Card>

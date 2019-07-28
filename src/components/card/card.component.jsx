@@ -16,7 +16,7 @@ const Card = ({ ...props }) => {
   return (
     <div
       className={`${classes.card} ${plain && classes.cardPlain} ${carousel &&
-        classes.cardCarousel}`}
+        classes.cardCarousel} ${className && className}`}
       {...rest}
     >
       {children}
