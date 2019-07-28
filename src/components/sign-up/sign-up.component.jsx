@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 
 import './sign-up.styles.scss';
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
-import FormInput from '../form-input/form-input.component';
-import CustomButton from '../custom-button/custom-button.component';
+// import FormInput from '../form-input/form-input.component';
+// import CustomButton from '../custom-button/custom-button.component';
 
 const SignUp = () => {
   const [displayName, setDisplayName] = useState('');
@@ -42,7 +42,7 @@ const SignUp = () => {
       <h2 className="title">I do not have an account</h2>
       <span>Sign up with your email and password</span>
       <form className="sign-up-form" onSubmit={handleSubmit}>
-        <FormInput
+        {/* <FormInput
           type="text"
           name="displayName"
           onChange={event => setDisplayName(event.target.value)}
@@ -73,8 +73,8 @@ const SignUp = () => {
           value={confirmPassword}
           label="Confirm Password"
           required
-        />
-        <CustomButton type="submit"> SIGN UP </CustomButton>
+        /> */}
+        {/* <CustomButton type="submit"> SIGN UP </CustomButton> */}
       </form>
     </div>
   );
