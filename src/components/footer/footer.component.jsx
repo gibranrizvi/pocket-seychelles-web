@@ -1,39 +1,29 @@
+import React from 'react';
 
-/*eslint-disable*/
-import React from "react";
-// nodejs library to set properties for components
-import PropTypes from "prop-types";
-// nodejs library that concatenates classes
-import classNames from "classnames";
-import { List, ListItem, withStyles } from "@material-ui/core";
+import { List, ListItem, withStyles } from '@material-ui/core';
 
 // @material-ui/icons
-import Favorite from "@material-ui/icons/Favorite";
+import Favorite from '@material-ui/icons/Favorite';
 
-import footerStyle from "assets/jss/material-kit-react/components/footerStyle.jsx";
+import footerStyle from './footer.styles';
 
-function Footer({ ...props }) {
+const Footer = ({ ...props }) => {
   const { classes, whiteFont } = props;
-  const footerClasses = classNames({
-    [classes.footer]: true,
-    [classes.footerWhiteFont]: whiteFont
-  });
-  const aClasses = classNames({
-    [classes.a]: true,
-    [classes.footerWhiteFont]: whiteFont
-  });
+
   return (
-    <footer className={footerClasses}>
+    <footer
+      className={`${classes.footer} ${whiteFont && classes.footerWhiteFont}`}
+    >
       <div className={classes.container}>
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/?ref=mkr-footer"
+                href="https://www.moonpresence.com"
                 className={classes.block}
                 target="_blank"
               >
-                Creative Tim
+                Moon Presence
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
@@ -66,25 +56,19 @@ function Footer({ ...props }) {
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{" "}
-          <Favorite className={classes.icon} /> by{" "}
+          &copy; {1900 + new Date().getYear()} , made with{' '}
+          <Favorite className={classes.icon} /> by{' '}
           <a
-            href="https://www.creative-tim.com?ref=mkr-footer"
-            className={aClasses}
+            href="https://www.moonpresence.com"
+            className={`${classes.a} ${whiteFont && classes.footerWhiteFont}`}
             target="_blank"
           >
-            Creative Tim
-          </a>{" "}
-          for a better web.
+            Moon Presence
+          </a>
         </div>
       </div>
     </footer>
   );
-}
-
-Footer.propTypes = {
-  classes: PropTypes.object.isRequired,
-  whiteFont: PropTypes.bool
 };
 
 export default withStyles(footerStyle)(Footer);

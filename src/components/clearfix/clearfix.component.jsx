@@ -1,7 +1,7 @@
-import React from './node_modules/react';
+import React from 'react';
 
 // mterial-ui components
-import withStyles from './node_modules/@material-ui/core/styles/withStyles';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 const style = {
   clearfix: {

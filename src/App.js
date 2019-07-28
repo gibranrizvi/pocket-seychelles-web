@@ -4,10 +4,11 @@ import { Switch, Route } from 'react-router-dom';
 import './assets/scss/material-kit-react.scss?v=1.7.0';
 
 import Header from './components/header/header.component';
+import Footer from 'components/footer/footer.component.jsx';
+
 import LandingPage from './pages/landing/landing.component';
 import AuthPage from './pages/auth/auth.component';
 
-import './App.css';
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 const App = () => {
@@ -53,6 +54,7 @@ const App = () => {
         <Route exact path="/" component={LandingPage} />
         {/* <Route exact path="/sign-in" component={AuthPage} /> */}
       </Switch>
+      <Footer />
     </div>
   );
 };
