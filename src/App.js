@@ -41,13 +41,15 @@ const App = () => {
   return (
     <div className="App">
       <Header
+        currentUser={currentUser}
         color="transparent"
         routes={[]}
         brand="Pocket Seychelles"
-        rightLinks={<HeaderLinks />}
+        leftLinks={<HeaderLinks />}
+        leftLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 400,
+          height: 240,
           color: 'white'
         }}
       />

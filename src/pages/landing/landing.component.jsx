@@ -1,4 +1,6 @@
 import React from 'react';
+
+// @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
 
 // Core components
@@ -7,9 +9,10 @@ import GridItem from 'components/grid/grid-item.component';
 import Button from 'components/custom-button/button.component';
 import Parallax from 'components/parallax/parallax.component';
 import ProductSection from './sections/product.component';
+import TeamSection from './sections/team.component';
+import WorkSection from './sections/work.component';
 
-// Import styles
-import landingPageStyle from 'assets/jss/material-kit-react/views/landingPage';
+import landingPageStyle from './landing.styles';
 
 const LandingPage = ({ classes }) => {
   return (
@@ -41,8 +44,8 @@ const LandingPage = ({ classes }) => {
       <div className={`${classes.main} ${classes.mainRaised}`}>
         <div className={classes.container}>
           <ProductSection />
-          {/* <TeamSection />
-          <WorkSection /> */}
+          <TeamSection />
+          <WorkSection />
         </div>
       </div>
     </div>

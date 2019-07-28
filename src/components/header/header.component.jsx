@@ -26,7 +26,8 @@ const Header = ({
   leftLinks,
   brand,
   fixed,
-  absolute
+  absolute,
+  ...props
 }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -66,7 +67,11 @@ const Header = ({
     }
   };
 
-  const brandComponent = <Button className={classes.title}>{brand}</Button>;
+  const brandComponent = (
+    <Button onClick={() => props.history.push('/')} className={classes.title}>
+      {brand}
+    </Button>
+  );
 
   return (
     <AppBar

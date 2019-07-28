@@ -33,7 +33,9 @@ function CustomInput({ ...props }) {
       {labelText !== undefined ? (
         <InputLabel
           className={`${classes.labelRoot} ${error &&
-            labelRootError} ${success && !error && labelRootSuccess}`}
+            classes.labelRootError} ${success &&
+            !error &&
+            classes.labelRootSuccess}`}
           htmlFor={id}
           {...labelProps}
         >
