@@ -87,14 +87,7 @@ const HeaderLinks = ({ ...props }) => {
           dropdownList={[
             <Link to="/" className={classes.dropdownLink}>
               All components
-            </Link>,
-            <a
-              href="https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar"
-              target="_blank"
-              className={classes.dropdownLink}
-            >
-              Documentation
-            </a>
+            </Link>
           ]}
         />
       </ListItem>
@@ -102,9 +95,9 @@ const HeaderLinks = ({ ...props }) => {
       <ListItem className={classes.listItem}>
         <Button
           onClick={() => history.push('/sign-in')}
-          color="rose"
+          color="twitter"
           target="_blank"
-          className={classes.navLink}
+          className={classes.registerNavLink}
         >
           <ExitToApp className={classes.icons} />
           GET STARTED
