@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import FirebaseContext from './firebase.context';
 
 const config = {
   apiKey: 'AIzaSyDD-CrBqkcbuhqotDMn1JoTi91Jklmw6jQ',
@@ -14,7 +15,6 @@ const config = {
 
 // Saving new user or updating existing user in Firestore
 export const createUserProfileDocument = async (userAuth, additionalData) => {
-  console.log(userAuth);
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
@@ -60,6 +60,7 @@ firebase.initializeApp(config);
 // Export Auth and Firestore services
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export { FirebaseContext };
 
 // Google OAuth set up
 const provider = new firebase.auth.GoogleAuthProvider();

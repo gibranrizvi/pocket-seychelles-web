@@ -4,8 +4,7 @@ import {
   dangerCardHeader,
   infoCardHeader,
   primaryCardHeader,
-  roseCardHeader,
-  twitterCardHeader
+  roseCardHeader
 } from 'assets/jss/material-kit-react';
 
 const cardHeaderStyle = {

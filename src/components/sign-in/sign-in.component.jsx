@@ -10,8 +10,14 @@ const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
+
+    try {
+      return await auth.signInWithEmailAndPassword(email, password);
+    } catch (error) {
+      console.log(error.message);
+    }
 
     setEmail('');
     setPassword('');

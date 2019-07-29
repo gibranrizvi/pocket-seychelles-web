@@ -22,6 +22,7 @@ const Footer = ({ ...props }) => {
                 href="https://www.moonpresence.com"
                 className={classes.block}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Moon Presence
               </a>
@@ -31,6 +32,7 @@ const Footer = ({ ...props }) => {
                 href="https://www.creative-tim.com/presentation?ref=mkr-footer"
                 className={classes.block}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 About us
               </a>
@@ -40,6 +42,7 @@ const Footer = ({ ...props }) => {
                 href="http://blog.creative-tim.com/?ref=mkr-footer"
                 className={classes.block}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Blog
               </a>
@@ -49,6 +52,7 @@ const Footer = ({ ...props }) => {
                 href="https://www.creative-tim.com/license?ref=mkr-footer"
                 className={classes.block}
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 Licenses
               </a>
@@ -62,6 +66,7 @@ const Footer = ({ ...props }) => {
             href="https://www.moonpresence.com"
             className={`${classes.a} ${whiteFont && classes.footerWhiteFont}`}
             target="_blank"
+            rel="noopener noreferrer"
           >
             Moon Presence
           </a>

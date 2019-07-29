@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -14,9 +14,6 @@ import Drawer from '@material-ui/core/Drawer';
 import Menu from '@material-ui/icons/Menu';
 
 import headerStyle from './header.styles';
-
-// Firebase auth import
-import { auth } from 'firebase/firebase.utils';
 
 const Header = ({
   classes,

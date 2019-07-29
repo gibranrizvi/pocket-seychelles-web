@@ -1,17 +1,11 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-
-import DeleteIcon from '@material-ui/icons/Delete';
-import IconButton from '@material-ui/core/IconButton';
 
 // React components for routing our app without refresh
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 // @material-ui/core components
-import withStyles from '@material-ui/core/styles/withStyles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Tooltip from '@material-ui/core/Tooltip';
+import { withStyles } from '@material-ui/core/styles';
+import { List, ListItem, Tooltip } from '@material-ui/core';
 
 // @material-ui/icons
 import { Apps, ExitToApp } from '@material-ui/icons';
@@ -20,10 +14,15 @@ import { Apps, ExitToApp } from '@material-ui/icons';
 import CustomDropdown from 'components/custom-dropdown/custom-dropdown.component';
 import Button from 'components/custom-button/button.component.jsx';
 
+import profileImage from 'assets/img/faces/avatar.jpg';
+
 import headerLinksStyle from './header-links.styles';
+import { FirebaseContext } from 'firebase/firebase.utils';
 
 const HeaderLinks = ({ ...props }) => {
-  const { classes, left, history } = props;
+  const { auth } = React.useContext(FirebaseContext);
+
+  const { classes, left, history, currentUser } = props;
   return left ? (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
@@ -92,17 +91,50 @@ const HeaderLinks = ({ ...props }) => {
         />
       </ListItem>
 
-      <ListItem className={classes.listItem}>
-        <Button
-          onClick={() => history.push('/sign-in')}
-          color="twitter"
-          target="_blank"
-          className={classes.registerNavLink}
-        >
-          <ExitToApp className={classes.icons} />
-          GET STARTED
-        </Button>
-      </ListItem>
+      {currentUser ? (
+        <ListItem className={classes.listItem}>
+          <CustomDropdown
+            left
+            caret={false}
+            hoverColor="black"
+            dropdownHeader={currentUser.displayName}
+            buttonText={
+              <img src={profileImage} className={classes.img} alt="profile" />
+            }
+            buttonProps={{
+              className: `${classes.navLink} ${classes.imageDropdownButton}`,
+              color: 'transparent'
+            }}
+            dropdownList={[
+              'Profile',
+              'Settings',
+              <Button
+                onClick={() => {
+                  history.push('/sign-in');
+                  auth.signOut();
+                }}
+                color="transparent"
+                size="sm"
+                simple
+              >
+                Sign out
+              </Button>
+            ]}
+          />
+        </ListItem>
+      ) : (
+        <ListItem className={classes.listItem}>
+          <Button
+            onClick={() => history.push('/sign-in')}
+            color="twitter"
+            target="_blank"
+            className={classes.registerNavLink}
+          >
+            <ExitToApp className={classes.icons} />
+            Get started
+          </Button>
+        </ListItem>
+      )}
     </List>
   );
 };
