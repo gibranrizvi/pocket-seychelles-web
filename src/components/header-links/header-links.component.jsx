@@ -94,10 +94,14 @@ const HeaderLinks = ({ ...props }) => {
       {currentUser ? (
         <ListItem className={classes.listItem}>
           <CustomDropdown
-            left
+            left={false}
             caret={false}
             hoverColor="black"
-            dropdownHeader={currentUser.displayName}
+            dropdownHeader={
+              <h6>
+                {currentUser.first_name} {currentUser.last_name}
+              </h6>
+            }
             buttonText={
               <img src={profileImage} className={classes.img} alt="profile" />
             }
@@ -108,17 +112,14 @@ const HeaderLinks = ({ ...props }) => {
             dropdownList={[
               'Profile',
               'Settings',
-              <Button
+              <span
                 onClick={() => {
                   history.push('/sign-in');
                   auth.signOut();
                 }}
-                color="transparent"
-                size="sm"
-                simple
               >
                 Sign out
-              </Button>
+              </span>
             ]}
           />
         </ListItem>
