@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import './assets/scss/material-kit-react.scss?v=1.7.0';
+import 'assets/scss/material-kit-react.scss?v=1.7.0';
 
 import Header from 'components/header/header.component';
 import Footer from 'components/footer/footer.component';
@@ -41,12 +41,10 @@ const App = () => {
   return (
     <div className="App">
       <Header
-        currentUser={currentUser}
         color="transparent"
         routes={[]}
-        brand="Pocket Seychelles"
         leftLinks={<HeaderLinks left />}
-        rightLinks={<HeaderLinks />}
+        rightLinks={<HeaderLinks currentUser={currentUser} />}
         fixed
         changeColorOnScroll={{
           height: 240,
@@ -55,9 +53,8 @@ const App = () => {
       />
       <Switch>
         <Route exact path="/" component={LandingPage} />
-        {/* <Route exact path="/sign-in" component={AuthPage} /> */}
+        <Route exact path="/sign-in" component={AuthPage} />
       </Switch>
-      <Footer />
     </div>
   );
 };

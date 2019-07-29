@@ -3,7 +3,8 @@ import {
   successCardHeader,
   dangerCardHeader,
   infoCardHeader,
-  primaryCardHeader
+  primaryCardHeader,
+  roseCardHeader
 } from 'assets/jss/material-kit-react';
 
 const cardHeaderStyle = {
@@ -24,7 +25,8 @@ const cardHeaderStyle = {
   successCardHeader,
   dangerCardHeader,
   infoCardHeader,
-  primaryCardHeader
+  primaryCardHeader,
+  roseCardHeader
 };
 
 export default cardHeaderStyle;

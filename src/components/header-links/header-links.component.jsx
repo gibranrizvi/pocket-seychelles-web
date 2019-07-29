@@ -14,7 +14,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Tooltip from '@material-ui/core/Tooltip';
 
 // @material-ui/icons
-import { Apps, CloudDownload } from '@material-ui/icons';
+import { Apps, ExitToApp } from '@material-ui/icons';
 
 // Core components
 import CustomDropdown from 'components/custom-dropdown/custom-dropdown.component';
@@ -33,44 +33,7 @@ const HeaderLinks = ({ ...props }) => {
           target="_blank"
           className={classes.navLink}
         >
-          <CloudDownload className={classes.icons} /> Discover
-        </Button>
-      </ListItem>
-    </List>
-  ) : (
-    <List className={classes.list}>
-      <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="Components"
-          buttonProps={{
-            className: classes.navLink,
-            color: 'transparent'
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/" className={classes.dropdownLink}>
-              All components
-            </Link>,
-            <a
-              href="https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar"
-              target="_blank"
-              className={classes.dropdownLink}
-            >
-              Documentation
-            </a>
-          ]}
-        />
-      </ListItem>
-
-      <ListItem className={classes.listItem}>
-        <Button
-          href="https://www.creative-tim.com/product/material-kit-react?ref=mkr-navbar"
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-        >
-          <CloudDownload className={classes.icons} /> Get Started
+          Discover
         </Button>
       </ListItem>
 
@@ -108,6 +71,44 @@ const HeaderLinks = ({ ...props }) => {
             <i className={classes.socialIcons + ' fab fa-instagram'} />
           </Button>
         </Tooltip>
+      </ListItem>
+    </List>
+  ) : (
+    <List className={classes.list}>
+      <ListItem className={classes.listItem}>
+        <CustomDropdown
+          noLiPadding
+          buttonText="Components"
+          buttonProps={{
+            className: classes.navLink,
+            color: 'transparent'
+          }}
+          buttonIcon={Apps}
+          dropdownList={[
+            <Link to="/" className={classes.dropdownLink}>
+              All components
+            </Link>,
+            <a
+              href="https://creativetimofficial.github.io/material-kit-react/#/documentation?ref=mkr-navbar"
+              target="_blank"
+              className={classes.dropdownLink}
+            >
+              Documentation
+            </a>
+          ]}
+        />
+      </ListItem>
+
+      <ListItem className={classes.listItem}>
+        <Button
+          onClick={() => history.push('/sign-in')}
+          color="rose"
+          target="_blank"
+          className={classes.navLink}
+        >
+          <ExitToApp className={classes.icons} />
+          GET STARTED
+        </Button>
       </ListItem>
     </List>
   );

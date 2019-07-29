@@ -11,6 +11,7 @@ import Parallax from 'components/parallax/parallax.component';
 import ProductSection from './sections/product.component';
 import TeamSection from './sections/team.component';
 import WorkSection from './sections/work.component';
+import Footer from 'components/footer/footer.component';
 
 import landingPageStyle from './landing.styles';
 
@@ -48,6 +49,7 @@ const LandingPage = ({ classes }) => {
           <WorkSection />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

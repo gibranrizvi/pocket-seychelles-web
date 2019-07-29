@@ -1,6 +1,6 @@
 import { container } from 'assets/jss/material-kit-react.jsx';
 
-const signupPageStyle = {
+const authPageStyle = {
   container: {
     ...container,
     zIndex: '2',
@@ -88,4 +88,4 @@ const signupPageStyle = {
   }
 };
 
-export default signupPageStyle;
+export default authPageStyle;

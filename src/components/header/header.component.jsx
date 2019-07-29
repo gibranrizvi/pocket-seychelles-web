@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -27,6 +27,7 @@ const Header = ({
   brand,
   fixed,
   absolute,
+  history,
   ...props
 }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -68,8 +69,14 @@ const Header = ({
   };
 
   const brandComponent = (
-    <Button onClick={() => props.history.push('/')} className={classes.title}>
-      {brand}
+    <Button
+      style={{ paddingBottom: 16 }}
+      onClick={() => history.push('/')}
+      className={classes.title}
+    >
+      <h3 className={classes.brand}>
+        <span style={{ fontWeight: 'bold' }}>POCKET</span>SEYCHELLES
+      </h3>
     </Button>
   );
 
@@ -122,4 +129,4 @@ const Header = ({
   );
 };
 
-export default withStyles(headerStyle)(Header);
+export default withRouter(withStyles(headerStyle)(Header));
