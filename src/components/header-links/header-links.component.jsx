@@ -36,7 +36,7 @@ const HeaderLinks = ({ ...props }) => {
         </Button>
       </ListItem>
 
-      <ListItem className={classes.listItem}>
+      {/* <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-facebook"
           title="Follow us on facebook"
@@ -70,7 +70,7 @@ const HeaderLinks = ({ ...props }) => {
             <i className={classes.socialIcons + ' fab fa-instagram'} />
           </Button>
         </Tooltip>
-      </ListItem>
+      </ListItem> */}
     </List>
   ) : (
     <List className={classes.list}>

@@ -1,62 +1,103 @@
 import React from 'react';
+import clsx from 'clsx';
 
 // @material-ui/core components
-import withStyles from '@material-ui/core/styles/withStyles';
-import FormControl from '@material-ui/core/FormControl';
-import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input';
+import { makeStyles } from '@material-ui/core/styles/';
+import { TextField, IconButton, InputAdornment } from '@material-ui/core';
+
+import { Face, Visibility, VisibilityOff } from '@material-ui/icons';
 
 import customInputStyle from './custom-input.styles';
 
-function CustomInput({ ...props }) {
-  const {
-    classes,
-    formControlProps,
-    labelText,
-    id,
-    labelProps,
-    inputProps,
-    error,
-    white,
-    inputRootCustomClasses,
-    success
-  } = props;
+const CustomInput = ({
+  name,
+  type,
+  label,
+  placeholder,
+  margin,
+  fullWidth,
+  variant,
+  onChange,
+  value,
+  icon,
+  dense,
+  error,
+  white,
+  success
+}) => {
+  const classes = useStyles();
+  const [showPassword, setShowPassword] = React.useState(false);
 
-  var formControlClasses;
-  if (formControlProps !== undefined) {
-    formControlClasses = `${classes.formControl} ${formControlProps.className}`;
-  } else {
-    formControlClasses = classes.formControl;
-  }
-  return (
-    <FormControl {...formControlProps} className={formControlClasses}>
-      {labelText !== undefined ? (
-        <InputLabel
-          className={`${classes.labelRoot} ${error &&
-            classes.labelRootError} ${success &&
-            !error &&
-            classes.labelRootSuccess}`}
-          htmlFor={id}
-          {...labelProps}
-        >
-          {labelText}
-        </InputLabel>
-      ) : null}
-      <Input
-        classes={{
-          input: `${classes.input} ${white && classes.whiteInput}`,
-          root: inputRootCustomClasses && inputRootCustomClasses,
-          disabled: classes.disabled,
-          underline: `${classes.underline} ${error &&
-            classes.underlineError} ${success &&
-            !error &&
-            classes.underlineSuccess} ${white && classes.whiteUnderline}`
-        }}
-        id={id}
-        {...inputProps}
-      />
-    </FormControl>
+  return type === 'password' ? (
+    <TextField
+      name={name}
+      type={showPassword ? 'text' : 'password'}
+      label={label}
+      placeholder={placeholder}
+      margin={margin}
+      fullWidth={fullWidth}
+      variant={variant}
+      onChange={onChange}
+      value={value}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              edge="end"
+              aria-label="toggle password visibility"
+              onClick={() => setShowPassword(prevState => !prevState)}
+              onMouseDown={e => e.preventDefault()}
+            >
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        )
+      }}
+      className={clsx({ [classes.textField]: true, [classes.dense]: dense })}
+    />
+  ) : (
+    <TextField
+      name={name}
+      type={type}
+      label={label}
+      placeholder={placeholder}
+      margin={margin}
+      fullWidth={fullWidth}
+      variant={variant}
+      onChange={onChange}
+      value={value}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              edge="end"
+              onClick={() => {}}
+              onMouseDown={e => e.preventDefault()}
+            >
+              {icon}
+            </IconButton>
+          </InputAdornment>
+        )
+      }}
+      className={clsx({ [classes.textField]: true, [classes.dense]: dense })}
+    />
   );
-}
+};
 
-export default withStyles(customInputStyle)(CustomInput);
+export default CustomInput;
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  dense: {
+    marginTop: theme.spacing(1)
+  },
+  margin: {
+    marginTop: 8
+  },
+  textField: {
+    flexBasis: 200
+  }
+}));
