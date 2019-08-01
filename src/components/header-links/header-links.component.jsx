@@ -102,7 +102,14 @@ const HeaderLinks = ({ ...props }) => {
 
       {currentUser ? (
         <ListItem className={classes.listItem}>
-          <CustomDropdown
+          <Button
+            onClick={() => auth.signOut()}
+            color="transparent"
+            className={classes.navLink}
+          >
+            Sign out
+          </Button>
+          {/* <CustomDropdown
             dropup={false}
             left={true}
             caret={false}
@@ -136,7 +143,7 @@ const HeaderLinks = ({ ...props }) => {
               'Settings',
               <span onClick={() => auth.signOut()}>Sign out</span>
             ]}
-          />
+          /> */}
         </ListItem>
       ) : (
         <ListItem className={classes.listItem}>

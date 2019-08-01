@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { uploadProfilePicture } from 'firebase/firebase.utils';
+
 import {
   dangerColor,
   twitterColor,
@@ -16,11 +18,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Checkbox, FormControlLabel, IconButton } from '@material-ui/core';
 
-import {
-  Check,
-  CheckCircleOutlineRounded,
-  AddAPhotoOutlined
-} from '@material-ui/icons';
+import { Check, AddAPhotoOutlined } from '@material-ui/icons';
 
 import GridContainer from 'components/grid/grid-container.component';
 import GridItem from 'components/grid/grid-item.component';
@@ -58,7 +56,6 @@ const SignUpForm = ({ ...props }) => {
   // Function 1: Submit sign up form
   const handleSignUpSubmit = async event => {
     event.preventDefault();
-    setSubmitting(true);
 
     // Form validation
     if (!email) {
@@ -104,8 +101,15 @@ const SignUpForm = ({ ...props }) => {
         firstName: '',
         lastName: 'Last name field is required'
       });
-    } else {
-      setErrors({});
+    }
+
+    setErrors({});
+    setSubmitting(true);
+
+    let downloadLink;
+
+    if (pictureURI) {
+      downloadLink = await uploadProfilePicture(pictureURI);
     }
 
     try {
@@ -114,7 +118,19 @@ const SignUpForm = ({ ...props }) => {
         password
       );
 
-      await createUserProfileDocument(user, { firstName, lastName });
+      if (!user) return;
+      else {
+        const { uid, email } = user;
+        const userData = {
+          uid,
+          email,
+          first_name: firstName,
+          last_name: lastName,
+          profile_picture: pictureURI ? downloadLink : 'default'
+        };
+
+        await createUserProfileDocument(userData);
+      }
     } catch (error) {
       console.log(error);
       return setErrors({
@@ -124,10 +140,15 @@ const SignUpForm = ({ ...props }) => {
   };
 
   return (
-    <form onSubmit={handleSignUpSubmit} className={classes.form} noValidate>
+    <form
+      onSubmit={submitting ? null : handleSignUpSubmit}
+      className={classes.form}
+      noValidate
+    >
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <h2>Create a new account</h2>
       </div>
+
       <GridContainer justify="center">
         <GridItem xs={12} sm={10} md={6} lg={6} xl={6}>
           <CardBody>
@@ -289,7 +310,7 @@ const SignUpForm = ({ ...props }) => {
           </div>
           <CardFooter className={classes.cardFooter}>
             <Button type="submit" color="danger" size="md" disabled={!checked}>
-              Get started
+              {submitting ? 'One moment please' : 'Get started'}
             </Button>
           </CardFooter>
         </GridItem>

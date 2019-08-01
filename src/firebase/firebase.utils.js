@@ -13,27 +13,34 @@ const config = {
   appId: '1:1084215164429:web:da30016f7dbfbd72'
 };
 
-// Saving new user or updating existing user in Firestore
-export const createUserProfileDocument = async (userAuth, additionalData) => {
-  if (!userAuth) return;
+// Upload picture to Firebase storage and get a download URL
+export const uploadProfilePicture = async () => {
+  console.log('Uploading to firebase storage');
+};
 
-  const userRef = firestore.doc(`users/${userAuth.uid}`);
+// Saving new user or updating existing user in Firestore
+export const createUserProfileDocument = async ({
+  uid,
+  email,
+  first_name,
+  last_name,
+  profile_picture
+}) => {
+  const userRef = firestore.doc(`users/${uid}`);
 
   const snapshot = await userRef.get();
 
   if (!snapshot.exists) {
     // Create new user
-    const { first_name, last_name, profile_picture, email } = userAuth;
     const created_at = new Date();
 
     try {
       await userRef.set({
+        email,
         first_name,
         last_name,
         profile_picture,
-        email,
-        created_at,
-        ...additionalData
+        created_at
       });
     } catch (error) {
       console.log(error.message);
@@ -44,7 +51,7 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
 
     try {
       await userRef.update({
-        last_logged_in
+        last_logged_in: last_logged_in
       });
     } catch (error) {
       console.log(error.message);
@@ -67,7 +74,19 @@ const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({ prompt: 'select_account' });
 
 // Export signInWithGoogle method
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const signInWithGoogle = async () => {
+  const { user } = await auth.signInWithPopup(provider);
+  console.log(user);
+  const names = user.displayName.split(' ');
+  const userData = {
+    uid: user.uid,
+    email: user.email,
+    first_name: names[0],
+    last_name: names[1],
+    profile_picture: user.photoURL
+  };
+  await createUserProfileDocument(userData);
+};
 
 // Firebase default export
 export default firebase;

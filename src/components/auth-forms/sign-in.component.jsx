@@ -29,7 +29,6 @@ const SignInForm = ({ ...props }) => {
   // Function 1: Submit sign in form
   const handleSignInSubmit = async event => {
     event.preventDefault();
-    setSubmitting(true);
 
     // Form validation
     if (!email) {
@@ -45,13 +44,15 @@ const SignInForm = ({ ...props }) => {
         email: '',
         password: 'Password field is required'
       });
-    } else {
-      setErrors({});
     }
 
+    setErrors({});
+    setSubmitting(true);
+
     try {
-      const user = await auth.signInWithEmailAndPassword(email, password);
-      return createUserProfileDocument(user);
+      const { user } = await auth.signInWithEmailAndPassword(email, password);
+
+      return createUserProfileDocument({ uid: user.uid });
     } catch (error) {
       console.log(error);
       return setErrors({
@@ -63,9 +64,9 @@ const SignInForm = ({ ...props }) => {
   // Return statement
   return (
     <form onSubmit={handleSignInSubmit} className={classes.form} noValidate>
-      <CardHeader color="info" className={classes.cardHeader}>
-        <h3>Sign in to get started</h3>
-      </CardHeader>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <h2>Sign in</h2>
+      </div>
 
       <CardBody>
         <SocialLogin signIn />
@@ -107,7 +108,7 @@ const SignInForm = ({ ...props }) => {
       </CardBody>
       <CardFooter className={classes.cardFooter}>
         <Button type="submit" color="twitter" size="lg">
-          Sign in
+          {submitting ? 'One moment please' : 'Sign in'}
         </Button>
       </CardFooter>
     </form>

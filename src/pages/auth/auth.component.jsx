@@ -24,8 +24,7 @@ const AuthPage = ({ ...props }) => {
   const classes = useStyles();
 
   const [cardAnimation, setCardAnimation] = React.useState('cardHidden');
-  // TODO revert default to false
-  const [showLoginForm, setShowLoginForm] = React.useState(false);
+  const [showLoginForm, setShowLoginForm] = React.useState(true);
 
   const { history } = props;
 
