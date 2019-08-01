@@ -70,20 +70,32 @@ export const firestore = firebase.firestore();
 export { FirebaseContext };
 
 // Google OAuth set up
-const provider = new firebase.auth.GoogleAuthProvider();
-provider.setCustomParameters({ prompt: 'select_account' });
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 // Export signInWithGoogle method
 export const signInWithGoogle = async () => {
-  const { user } = await auth.signInWithPopup(provider);
-  console.log(user);
-  const names = user.displayName.split(' ');
+  const { user } = await auth.signInWithPopup(googleProvider);
+  formatUserData(user);
+};
+
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
+facebookProvider.setCustomParameters({ display: 'popup' });
+
+// Export signInWithFacebook method
+export const signInWithFacebook = async () => {
+  const { user } = await auth.signInWithPopup(facebookProvider);
+  formatUserData(user);
+};
+
+const formatUserData = async ({ uid, email, displayName, photoURL }) => {
+  const names = displayName.split(' ');
   const userData = {
-    uid: user.uid,
-    email: user.email,
+    uid,
+    email,
     first_name: names[0],
     last_name: names[1],
-    profile_picture: user.photoURL
+    profile_picture: photoURL
   };
   await createUserProfileDocument(userData);
 };

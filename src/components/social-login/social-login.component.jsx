@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 
-import { signInWithGoogle } from 'firebase/firebase.utils';
+import { signInWithGoogle, signInWithFacebook } from 'firebase/firebase.utils';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Icon } from '@material-ui/core';
@@ -37,6 +37,7 @@ const SocialLogin = ({ signIn, googleLoading, facebookLoading }) => {
           {signIn ? 'Continue' : 'Sign up'} with Google
         </Button>
         <Button
+          onClick={signInWithFacebook}
           variant="contained"
           size="sm"
           color="facebook"
