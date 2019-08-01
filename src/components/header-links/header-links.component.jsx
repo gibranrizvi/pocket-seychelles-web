@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core';
 import { List, ListItem, Tooltip } from '@material-ui/core';
 
 // @material-ui/icons
-import { Apps, ExitToApp } from '@material-ui/icons';
+import { ExitToApp } from '@material-ui/icons';
 
 // Core components
 import CustomDropdown from 'components/custom-dropdown/custom-dropdown.component';
@@ -74,7 +74,6 @@ const HeaderLinks = ({ ...props }) => {
         <Button
           onClick={() => history.push('/discover')}
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           Discover
@@ -85,7 +84,6 @@ const HeaderLinks = ({ ...props }) => {
         <Button
           onClick={() => history.push('/discover')}
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           Experiences
@@ -96,7 +94,6 @@ const HeaderLinks = ({ ...props }) => {
         <Button
           onClick={() => history.push('/discover')}
           color="transparent"
-          target="_blank"
           className={classes.navLink}
         >
           Transfers
@@ -109,7 +106,7 @@ const HeaderLinks = ({ ...props }) => {
             onClick={() => history.push()}
             left={false}
             caret={false}
-            hoverColor="primary"
+            hoverColor="danger"
             dropdownHeader={
               <h6>
                 {currentUser.first_name} {currentUser.last_name}
@@ -137,24 +134,20 @@ const HeaderLinks = ({ ...props }) => {
             dropdownList={[
               'Profile',
               'Settings',
-              <span
-                onClick={() => {
-                  console.log('Sign out clicked');
-                  auth.signOut();
-                  history.push('/sign-in');
-                }}
-              >
-                Sign out
-              </span>
+              <span onClick={() => auth.signOut()}>Sign out</span>
             ]}
           />
         </ListItem>
       ) : (
         <ListItem className={classes.listItem}>
-          <Link to="/sign-in" className={classes.navLink}>
+          <Button
+            onClick={() => history.push('/sign-in')}
+            color="transparent"
+            className={classes.navLink}
+          >
             <ExitToApp className={classes.icons} />
             Get started
-          </Link>
+          </Button>
         </ListItem>
       )}
     </List>
