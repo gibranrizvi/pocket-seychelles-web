@@ -17,7 +17,7 @@ const container = {
     maxWidth: '540px'
   },
   '@media (min-width: 768px)': {
-    maxWidth: '768px'
+    maxWidth: '880px'
   },
   '@media (min-width: 992px)': {
     maxWidth: '960px'
@@ -56,6 +56,18 @@ const successColor = '#4caf50';
 const infoColor = '#00acc1';
 const roseColor = '#e91e63';
 const grayColor = '#999999';
+const facebookColor = '#3b5998';
+const twitterColor = '#55acee';
+const pinterestColor = '#cc2127';
+const googleColor = '#dd4b39';
+const linkedinColor = '#0976b4';
+const dribbbleColor = '#ea4c89';
+const githubColor = '#333333';
+const youtubeColor = '#e52d27';
+const instagramColor = '#125688';
+const redditColor = '#ff4500';
+const tumblrColor = '#35465c';
+const behanceColor = '#1769ff';
 
 const primaryBoxShadow = {
   boxShadow:
@@ -175,6 +187,18 @@ export {
   infoColor,
   roseColor,
   grayColor,
+  facebookColor,
+  twitterColor,
+  pinterestColor,
+  googleColor,
+  linkedinColor,
+  dribbbleColor,
+  githubColor,
+  youtubeColor,
+  instagramColor,
+  redditColor,
+  tumblrColor,
+  behanceColor,
   primaryBoxShadow,
   infoBoxShadow,
   successBoxShadow,

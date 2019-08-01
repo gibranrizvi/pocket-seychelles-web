@@ -35,6 +35,7 @@ import Button from 'components/custom-button/button.component';
 
 const CustomDropdown = ({ ...props }) => {
   const {
+    onClick,
     buttonText,
     buttonIcon,
     dropdownList,
@@ -51,7 +52,6 @@ const CustomDropdown = ({ ...props }) => {
   const classes = useStyles();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
-  // let anchorEl = null;
 
   const [open, setOpen] = React.useState(false);
 
@@ -102,7 +102,7 @@ const CustomDropdown = ({ ...props }) => {
     <div>
       <div>
         <Button
-          aria-label="Notifications"
+          aria-label="Profile"
           aria-owns={open ? 'menu-list' : null}
           aria-haspopup="true"
           {...buttonProps}
@@ -120,13 +120,7 @@ const CustomDropdown = ({ ...props }) => {
         transition
         disablePortal
         placement={
-          dropup
-            ? left
-              ? 'top-start'
-              : 'top'
-            : left
-            ? 'bottom-start'
-            : 'bottom'
+          dropup ? (left ? 'top-start' : 'top') : left ? 'bottom-end' : 'bottom'
         }
         className={clsx({
           [classes.popperClose]: !open,

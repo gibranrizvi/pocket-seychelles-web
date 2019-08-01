@@ -23,23 +23,46 @@ const SignInForm = ({ ...props }) => {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
+  const [errors, setErrors] = React.useState({});
+  const [submitting, setSubmitting] = React.useState(false);
 
+  // Function 1: Submit sign in form
   const handleSignInSubmit = async event => {
     event.preventDefault();
+    setSubmitting(true);
+
+    // Form validation
+    if (!email) {
+      return setErrors({ ...errors, email: 'Email field is required' });
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+      return setErrors({
+        ...errors,
+        email: 'Please enter a valid email address'
+      });
+    } else if (!password) {
+      return setErrors({
+        ...errors,
+        email: '',
+        password: 'Password field is required'
+      });
+    } else {
+      setErrors({});
+    }
 
     try {
       const user = await auth.signInWithEmailAndPassword(email, password);
       return createUserProfileDocument(user);
     } catch (error) {
-      console.log(error.message);
+      console.log(error);
+      return setErrors({
+        general: 'Incorrect email address or password'
+      });
     }
-
-    setEmail('');
-    setPassword('');
   };
 
+  // Return statement
   return (
-    <form onSubmit={handleSignInSubmit} className={classes.form}>
+    <form onSubmit={handleSignInSubmit} className={classes.form} noValidate>
       <CardHeader color="info" className={classes.cardHeader}>
         <h3>Sign in to get started</h3>
       </CardHeader>
@@ -48,6 +71,7 @@ const SignInForm = ({ ...props }) => {
         <SocialLogin signIn />
 
         <CustomInput
+          autoFocus
           name="email"
           type="email"
           label="Email"
@@ -60,6 +84,8 @@ const SignInForm = ({ ...props }) => {
           icon={<Face />}
           dense
           required
+          error={!!errors.email || !!errors.general}
+          errorMessage={errors.email}
         />
 
         <CustomInput
@@ -72,8 +98,11 @@ const SignInForm = ({ ...props }) => {
           variant="outlined"
           onChange={e => setPassword(e.target.value)}
           value={password}
+          onFocus={() => setPassword('')}
           dense
           required
+          error={!!errors.password || !!errors.general}
+          errorMessage={errors.password || errors.general}
         />
       </CardBody>
       <CardFooter className={classes.cardFooter}>

@@ -24,7 +24,8 @@ const AuthPage = ({ ...props }) => {
   const classes = useStyles();
 
   const [cardAnimation, setCardAnimation] = React.useState('cardHidden');
-  const [showLoginForm, setShowLoginForm] = React.useState(true);
+  // TODO revert default to false
+  const [showLoginForm, setShowLoginForm] = React.useState(false);
 
   const { history } = props;
 
@@ -124,10 +125,10 @@ const useStyles = makeStyles(theme => ({
     minHeight: '100vh',
     height: 'auto',
     display: 'inherit',
-    position: 'relative',
-    margin: '0',
-    padding: '0',
-    border: '0',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
     alignItems: 'center',
     '&:before': {
       background: 'rgba(0, 0, 0, 0.5)'

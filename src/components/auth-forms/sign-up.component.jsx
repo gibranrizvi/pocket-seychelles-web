@@ -1,4 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
+import {
+  dangerColor,
+  twitterColor,
+  successColor
+} from 'assets/jss/material-kit-react';
 
 import {
   createUserProfileDocument,
@@ -7,9 +14,13 @@ import {
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import { Checkbox, FormControlLabel } from '@material-ui/core';
+import { Checkbox, FormControlLabel, IconButton } from '@material-ui/core';
 
-import Check from '@material-ui/icons/Check';
+import {
+  Check,
+  CheckCircleOutlineRounded,
+  AddAPhotoOutlined
+} from '@material-ui/icons';
 
 import GridContainer from 'components/grid/grid-container.component';
 import GridItem from 'components/grid/grid-item.component';
@@ -32,6 +43,8 @@ const SignUpForm = ({ ...props }) => {
     pictureURI: ''
   });
   const [checked, setChecked] = React.useState(false);
+  const [errors, setErrors] = React.useState({});
+  const [submitting, setSubmitting] = React.useState(false);
 
   const {
     email,
@@ -42,12 +55,57 @@ const SignUpForm = ({ ...props }) => {
     pictureURI
   } = values;
 
+  // Function 1: Submit sign up form
   const handleSignUpSubmit = async event => {
     event.preventDefault();
+    setSubmitting(true);
 
-    if (password !== confirmPassword) {
-      alert("Passwords don't match");
-      return;
+    // Form validation
+    if (!email) {
+      return setErrors({ ...errors, email: 'Email field is required' });
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(email)) {
+      return setErrors({
+        ...errors,
+        email: 'Please enter a valid email address'
+      });
+    } else if (!password) {
+      return setErrors({
+        ...errors,
+        email: '',
+        password: 'Password field is required'
+      });
+    } else if (password.length < 8) {
+      return setErrors({
+        ...errors,
+        email: '',
+        password: 'Password must be 8 or more characters long'
+      });
+    } else if (!confirmPassword) {
+      return setErrors({
+        ...errors,
+        password: '',
+        confirmPassword: 'Password confirmation is required'
+      });
+    } else if (password !== confirmPassword) {
+      return setErrors({
+        ...errors,
+        password: '',
+        confirmPassword: 'Passwords do not match'
+      });
+    } else if (!firstName) {
+      return setErrors({
+        ...errors,
+        confirmPassword: '',
+        firstName: 'First name field is required'
+      });
+    } else if (!lastName) {
+      return setErrors({
+        ...errors,
+        firstName: '',
+        lastName: 'Last name field is required'
+      });
+    } else {
+      setErrors({});
     }
 
     try {
@@ -59,20 +117,14 @@ const SignUpForm = ({ ...props }) => {
       await createUserProfileDocument(user, { firstName, lastName });
     } catch (error) {
       console.log(error);
+      return setErrors({
+        email: 'Email already exists'
+      });
     }
-
-    setValues({
-      email: '',
-      password: '',
-      confirmPassword: '',
-      firstName: '',
-      lastName: '',
-      pictureURI: ''
-    });
   };
 
   return (
-    <form onSubmit={handleSignUpSubmit} className={classes.form}>
+    <form onSubmit={handleSignUpSubmit} className={classes.form} noValidate>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <h2>Create a new account</h2>
       </div>
@@ -82,6 +134,7 @@ const SignUpForm = ({ ...props }) => {
             <SocialLogin />
 
             <CustomInput
+              autoFocus
               name="email"
               type="email"
               label="Email"
@@ -92,6 +145,10 @@ const SignUpForm = ({ ...props }) => {
               onChange={e => setValues({ ...values, email: e.target.value })}
               value={email}
               dense
+              required
+              error={!!errors.email}
+              errorMessage={errors.email}
+              success
             />
 
             <CustomInput
@@ -104,7 +161,12 @@ const SignUpForm = ({ ...props }) => {
               variant="outlined"
               onChange={e => setValues({ ...values, password: e.target.value })}
               value={password}
+              onFocus={() => setValues({ ...values, password: '' })}
               dense
+              required
+              error={!!errors.password}
+              errorMessage={errors.password}
+              success={password.length >= 8 && password === confirmPassword}
             />
 
             <CustomInput
@@ -119,7 +181,12 @@ const SignUpForm = ({ ...props }) => {
                 setValues({ ...values, confirmPassword: e.target.value })
               }
               value={confirmPassword}
+              onFocus={() => setValues({ ...values, confirmPassword: '' })}
               dense
+              required
+              error={!!errors.confirmPassword}
+              errorMessage={errors.confirmPassword}
+              success={password.length >= 8 && password === confirmPassword}
             />
           </CardBody>
         </GridItem>
@@ -138,6 +205,9 @@ const SignUpForm = ({ ...props }) => {
               }
               value={firstName}
               dense
+              required
+              error={!!errors.firstName}
+              errorMessage={errors.firstName}
             />
 
             <CustomInput
@@ -151,11 +221,45 @@ const SignUpForm = ({ ...props }) => {
               onChange={e => setValues({ ...values, lastName: e.target.value })}
               value={lastName}
               dense
+              required
+              error={!!errors.lastName}
+              errorMessage={errors.lastName}
             />
 
             {/* TODO add picture selector */}
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                marginTop: 4,
+                marginLeft: -12
+              }}
+            >
+              <input
+                accept="image/*"
+                id="image"
+                type="file"
+                className={classes.imageInput}
+                onChange={e =>
+                  setValues({ ...values, pictureURI: e.target.files[0] })
+                }
+              />
+              <label htmlFor="image">
+                <IconButton aria-label="upload picture" component="span">
+                  {pictureURI ? (
+                    <Check className={classes.uploadedCheckIcon} />
+                  ) : (
+                    <AddAPhotoOutlined className={classes.uploadImageIcon} />
+                  )}
+                </IconButton>
+              </label>
+              <p style={{ marginLeft: 4, marginTop: 10 }}>
+                Upload a profile picture (optional)
+              </p>
+            </div>
           </CardBody>
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <div className={classes.termsAndConditionsBlock}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -172,11 +276,19 @@ const SignUpForm = ({ ...props }) => {
                 label: classes.label,
                 root: classes.labelRoot
               }}
-              label="I agree to the terms &amp; conditions"
             />
+            <h6 className={classes.termsAndConditionsText}>
+              I agree to the{' '}
+              <Link
+                to="/terms-conditions"
+                className={classes.termsAndConditionsLink}
+              >
+                terms &amp; conditions
+              </Link>
+            </h6>
           </div>
           <CardFooter className={classes.cardFooter}>
-            <Button type="submit" color="twitter" size="lg" disabled={!checked}>
+            <Button type="submit" color="danger" size="md" disabled={!checked}>
               Get started
             </Button>
           </CardFooter>
@@ -235,5 +347,23 @@ const useStyles = makeStyles(theme => ({
     border: '0',
     borderRadius: '6px',
     justifyContent: 'center !important'
-  }
+  },
+  termsAndConditionsBlock: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8
+  },
+  termsAndConditionsText: { paddingLeft: 0, marginLeft: -14, color: 'grey' },
+  termsAndConditionsLink: {
+    color: dangerColor,
+    '&:hover': {
+      color: dangerColor,
+      textDecoration: 'underline'
+    }
+  },
+  imageInput: { display: 'none' },
+  checkedIcon: { color: dangerColor },
+  uploadImageIcon: { color: twitterColor },
+  uploadedCheckIcon: { color: successColor }
 }));

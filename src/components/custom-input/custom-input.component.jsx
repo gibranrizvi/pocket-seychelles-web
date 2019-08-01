@@ -10,11 +10,18 @@ import {
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, IconButton, InputAdornment, Icon } from '@material-ui/core';
+import {
+  TextField,
+  IconButton,
+  InputAdornment,
+  Icon,
+  FormHelperText
+} from '@material-ui/core';
 
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 const CustomInput = ({
+  autoFocus,
   name,
   type,
   label,
@@ -24,10 +31,13 @@ const CustomInput = ({
   variant,
   onChange,
   value,
+  onFocus,
   icon,
   dense,
   required,
+  disabled,
   error,
+  errorMessage,
   white,
   success
 }) => {
@@ -35,54 +45,84 @@ const CustomInput = ({
   const [showPassword, setShowPassword] = React.useState(false);
 
   return type === 'password' ? (
-    <TextField
-      name={name}
-      type={showPassword ? 'text' : 'password'}
-      label={label}
-      placeholder={placeholder}
-      margin={margin}
-      fullWidth={fullWidth}
-      variant={variant}
-      onChange={onChange}
-      value={value}
-      required={required}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <IconButton
-              edge="end"
-              aria-label="toggle password visibility"
-              onClick={() => setShowPassword(prevState => !prevState)}
-              onMouseDown={e => e.preventDefault()}
-            >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
-            </IconButton>
-          </InputAdornment>
-        )
-      }}
-      className={clsx({ [classes.textField]: true, [classes.dense]: dense })}
-    />
+    <>
+      <TextField
+        autoFocus={autoFocus}
+        name={name}
+        type={showPassword ? 'text' : 'password'}
+        label={label}
+        placeholder={placeholder}
+        margin={margin}
+        fullWidth={fullWidth}
+        variant={variant}
+        onChange={onChange}
+        value={value}
+        onFocus={onFocus}
+        required={required}
+        disabled={disabled}
+        error={error}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <IconButton
+                edge="end"
+                aria-label="toggle password visibility"
+                onClick={() => setShowPassword(prevState => !prevState)}
+                onMouseDown={e => e.preventDefault()}
+              >
+                {showPassword ? <VisibilityOff /> : <Visibility />}
+              </IconButton>
+            </InputAdornment>
+          )
+        }}
+        className={clsx({
+          [classes.textField]: true,
+          [classes.dense]: dense,
+          [classes.underlineSuccess]: success
+        })}
+      />
+      {errorMessage && (
+        <FormHelperText className={classes.errorMessage}>
+          {errorMessage}
+        </FormHelperText>
+      )}
+    </>
   ) : (
-    <TextField
-      name={name}
-      type={type}
-      label={label}
-      placeholder={placeholder}
-      margin={margin}
-      fullWidth={fullWidth}
-      variant={variant}
-      onChange={onChange}
-      value={value}
-      required={required}
-      InputProps={{
-        endAdornment: (
-          <InputAdornment position="end">
-            <Icon className={classes.emailIcon}>{icon}</Icon>
-          </InputAdornment>
-        )
-      }}
-      className={clsx({ [classes.textField]: true, [classes.dense]: dense })}
-    />
+    <>
+      <TextField
+        autoFocus={autoFocus}
+        name={name}
+        type={type}
+        label={label}
+        placeholder={placeholder}
+        margin={margin}
+        fullWidth={fullWidth}
+        variant={variant}
+        onChange={onChange}
+        value={value}
+        required={required}
+        disabled={disabled}
+        error={error}
+        InputProps={{
+          endAdornment: (
+            <InputAdornment position="end">
+              <Icon className={classes.emailIcon}>{icon}</Icon>
+            </InputAdornment>
+          )
+        }}
+        className={clsx({
+          [classes.textField]: true,
+          [classes.dense]: dense,
+          [classes.underline]: success,
+          [classes.underlineSuccess]: success
+        })}
+      />
+      {errorMessage && (
+        <FormHelperText className={classes.errorMessage}>
+          {errorMessage}
+        </FormHelperText>
+      )}
+    </>
   );
 };
 
@@ -100,7 +140,8 @@ const useStyles = makeStyles(theme => ({
     marginTop: 8
   },
   textField: {
-    flexBasis: 200
+    flexBasis: 200,
+    borderColor: successColor
   },
   disabled: {
     '&:before': {
@@ -182,5 +223,11 @@ const useStyles = makeStyles(theme => ({
   },
   emailIcon: {
     color: 'grey'
+  },
+  errorMessage: {
+    color: dangerColor,
+    fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
+    fontWeight: '400',
+    margin: 4
   }
 }));

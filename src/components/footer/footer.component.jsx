@@ -30,42 +30,22 @@ const Footer = ({ ...props }) => {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <Link
-                to="/"
-                className={classes.block}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link to="/" className={classes.block}>
                 Pocket Seychelles
               </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <Link
-                to="/about"
-                className={classes.block}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link to="/about" className={classes.block}>
                 Who we are
               </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <Link
-                to="/discover"
-                className={classes.block}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link to="/discover" className={classes.block}>
                 Discover Seychelles
               </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <Link
-                to="/terms-conditions"
-                className={classes.block}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <Link to="/terms-conditions" className={classes.block}>
                 Terms &amp; Conditions
               </Link>
             </ListItem>

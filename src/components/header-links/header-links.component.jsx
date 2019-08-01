@@ -103,8 +103,8 @@ const HeaderLinks = ({ ...props }) => {
       {currentUser ? (
         <ListItem className={classes.listItem}>
           <CustomDropdown
-            onClick={() => history.push()}
-            left={false}
+            dropup={false}
+            left={true}
             caret={false}
             hoverColor="danger"
             dropdownHeader={
