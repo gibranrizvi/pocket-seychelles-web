@@ -15,7 +15,7 @@ import {
   dangerBoxShadow,
   roseColor,
   roseBoxShadow
-} from 'assets/jss/material-kit-react.jsx';
+} from 'assets/jss/material-kit-react';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';

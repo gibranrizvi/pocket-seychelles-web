@@ -15,7 +15,7 @@ import { Apps, ExitToApp } from '@material-ui/icons';
 
 // Core components
 import CustomDropdown from 'components/custom-dropdown/custom-dropdown.component';
-import Button from 'components/custom-button/button.component.jsx';
+import Button from 'components/custom-button/button.component';
 
 import profileImage from 'assets/img/faces/avatar.jpg';
 

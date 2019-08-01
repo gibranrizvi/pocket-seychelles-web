@@ -1,16 +1,15 @@
-
-import React from "react";
+import React from 'react';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 // @material-ui/core components
-import withStyles from "@material-ui/core/styles/withStyles";
-import Snack from "@material-ui/core/SnackbarContent";
-import IconButton from "@material-ui/core/IconButton";
-import Icon from "@material-ui/core/Icon";
+import withStyles from '@material-ui/core/styles/withStyles';
+import Snack from '@material-ui/core/SnackbarContent';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
 // @material-ui/icons
-import Close from "@material-ui/icons/Close";
+import Close from '@material-ui/icons/Close';
 
-import snackbarContentStyle from "assets/jss/material-kit-react/components/snackbarContentStyle.jsx";
+import snackbarContentStyle from 'assets/jss/material-kit-react/components/snackbarContentStyle';
 
 class SnackbarContent extends React.Component {
   constructor(props) {
@@ -34,10 +33,10 @@ class SnackbarContent extends React.Component {
 
     let snackIcon = null;
     switch (typeof icon) {
-      case "object":
+      case 'object':
         snackIcon = <props.icon className={classes.icon} />;
         break;
-      case "string":
+      case 'string':
         snackIcon = <Icon className={classes.icon}>{props.icon}</Icon>;
         break;
       default:
@@ -56,8 +55,8 @@ class SnackbarContent extends React.Component {
             </div>
           }
           classes={{
-            root: classes.root + " " + classes[color],
-            message: classes.message + " " + classes.container
+            root: classes.root + ' ' + classes[color],
+            message: classes.message + ' ' + classes.container
           }}
         />
       )
@@ -74,7 +73,7 @@ class SnackbarContent extends React.Component {
 SnackbarContent.propTypes = {
   classes: PropTypes.object.isRequired,
   message: PropTypes.node.isRequired,
-  color: PropTypes.oneOf(["info", "success", "warning", "danger", "primary"]),
+  color: PropTypes.oneOf(['info', 'success', 'warning', 'danger', 'primary']),
   close: PropTypes.bool,
   icon: PropTypes.oneOfType([PropTypes.object, PropTypes.string])
 };

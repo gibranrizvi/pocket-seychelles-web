@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { container } from 'assets/jss/material-kit-react.jsx';
+import { container } from 'assets/jss/material-kit-react';
 
 import { FirebaseContext } from '../../firebase/firebase.utils';
 

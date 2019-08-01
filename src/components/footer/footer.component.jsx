@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import clsx from 'clsx';
 
-import { container, primaryColor } from 'assets/jss/material-kit-react.jsx';
+import { container, primaryColor } from 'assets/jss/material-kit-react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { List, ListItem } from '@material-ui/core';
@@ -29,57 +30,57 @@ const Footer = ({ ...props }) => {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.moonpresence.com"
+              <Link
+                to="/"
                 className={classes.block}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Moon Presence
-              </a>
+                Pocket Seychelles
+              </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/presentation?ref=mkr-footer"
+              <Link
+                to="/about-us"
                 className={classes.block}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                About us
-              </a>
+                Who we are
+              </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href="http://blog.creative-tim.com/?ref=mkr-footer"
+              <Link
+                to="/discover"
                 className={classes.block}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Blog
-              </a>
+                Discover Seychelles
+              </Link>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
-              <a
-                href="https://www.creative-tim.com/license?ref=mkr-footer"
+              <Link
+                to="/terms-conditions"
                 className={classes.block}
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Licenses
-              </a>
+                Terms &amp; Conditions
+              </Link>
             </ListItem>
           </List>
         </div>
         <div className={classes.right}>
-          &copy; {1900 + new Date().getYear()} , made with{' '}
+          &copy; {1900 + new Date().getYear()}, made with{' '}
           <Favorite className={classes.icon} /> by{' '}
           <a
-            href="https://www.moonpresence.com"
+            href="https://www.gibranrizvi.com"
             className={aClasses}
             target="_blank"
             rel="noopener noreferrer"
           >
-            Moon Presence
+            Gibran Rizvi
           </a>
         </div>
       </div>

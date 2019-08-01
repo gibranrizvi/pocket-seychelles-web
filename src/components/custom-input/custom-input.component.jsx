@@ -6,11 +6,11 @@ import {
   dangerColor,
   successColor,
   defaultFont
-} from 'assets/jss/material-kit-react.jsx';
+} from 'assets/jss/material-kit-react';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, IconButton, InputAdornment } from '@material-ui/core';
+import { TextField, IconButton, InputAdornment, Icon } from '@material-ui/core';
 
 import { Visibility, VisibilityOff } from '@material-ui/icons';
 
@@ -74,13 +74,7 @@ const CustomInput = ({
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton
-              edge="end"
-              onClick={() => {}}
-              onMouseDown={e => e.preventDefault()}
-            >
-              {icon}
-            </IconButton>
+            <Icon className={classes.emailIcon}>{icon}</Icon>
           </InputAdornment>
         )
       }}
@@ -182,5 +176,8 @@ const useStyles = makeStyles(theme => ({
       color: '#FFFFFF',
       opacity: '1'
     }
+  },
+  emailIcon: {
+    color: 'grey'
   }
 }));

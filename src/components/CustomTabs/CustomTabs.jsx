@@ -1,21 +1,20 @@
-
-import React from "react";
+import React from 'react';
 // nodejs library that concatenates classes
-import classNames from "classnames";
+import classNames from 'classnames';
 // nodejs library to set properties for components
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
 
 // material-ui components
-import withStyles from "@material-ui/core/styles/withStyles";
-import Tabs from "@material-ui/core/Tabs";
-import Tab from "@material-ui/core/Tab";
-import Icon from "@material-ui/core/Icon";
+import withStyles from '@material-ui/core/styles/withStyles';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Icon from '@material-ui/core/Icon';
 // core components
-import Card from "components/Card/Card.jsx";
-import CardBody from "components/Card/CardBody.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
+import Card from 'components/Card/Card';
+import CardBody from 'components/Card/CardBody';
+import CardHeader from 'components/Card/CardHeader';
 
-import customTabsStyle from "assets/jss/material-kit-react/components/customTabsStyle.jsx";
+import customTabsStyle from 'assets/jss/material-kit-react/components/customTabsStyle';
 
 class CustomTabs extends React.Component {
   state = {
@@ -58,7 +57,7 @@ class CustomTabs extends React.Component {
               if (prop.tabIcon) {
                 icon = {
                   icon:
-                    typeof prop.tabIcon === "string" ? (
+                    typeof prop.tabIcon === 'string' ? (
                       <Icon>{prop.tabIcon}</Icon>
                     ) : (
                       <prop.tabIcon />
@@ -97,12 +96,12 @@ class CustomTabs extends React.Component {
 CustomTabs.propTypes = {
   classes: PropTypes.object.isRequired,
   headerColor: PropTypes.oneOf([
-    "warning",
-    "success",
-    "danger",
-    "info",
-    "primary",
-    "rose"
+    'warning',
+    'success',
+    'danger',
+    'info',
+    'primary',
+    'rose'
   ]),
   title: PropTypes.string,
   tabs: PropTypes.arrayOf(
