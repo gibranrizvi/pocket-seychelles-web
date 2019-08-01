@@ -41,7 +41,7 @@ const Footer = ({ ...props }) => {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <Link
-                to="/about-us"
+                to="/about"
                 className={classes.block}
                 target="_blank"
                 rel="noopener noreferrer"

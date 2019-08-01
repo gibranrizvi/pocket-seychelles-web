@@ -1,7 +1,9 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import { defaultFont } from 'assets/jss/material-kit-react';
 import tooltip from 'assets/jss/material-kit-react/tooltipsStyle';
+import image from 'assets/jss/material-kit-react/imagesStyles';
 
 // React components for routing our app without refresh
 import { Link, withRouter } from 'react-router-dom';
@@ -22,9 +24,9 @@ import profileImage from 'assets/img/faces/avatar.jpg';
 import { FirebaseContext } from 'firebase/firebase.utils';
 
 const HeaderLinks = ({ ...props }) => {
-  const { auth } = React.useContext(FirebaseContext);
+  const { auth, currentUser } = React.useContext(FirebaseContext);
 
-  const { left, history, currentUser } = props;
+  const { left, history } = props;
 
   const classes = useStyles();
 
@@ -80,48 +82,53 @@ const HeaderLinks = ({ ...props }) => {
       </ListItem>
 
       <ListItem className={classes.listItem}>
-        <CustomDropdown
-          noLiPadding
-          buttonText="Discover"
-          buttonProps={{
-            className: classes.navLink,
-            color: 'transparent',
-            onClick: () => history.push('/discover')
-          }}
-          buttonIcon={Apps}
-          dropdownList={[
-            <Link to="/discover" className={classes.dropdownLink}>
-              Hotels
-            </Link>,
-            <Link to="/discover" className={classes.dropdownLink}>
-              Villas
-            </Link>,
-            <Link to="/discover" className={classes.dropdownLink}>
-              Guesthouses
-            </Link>,
-            <Link to="/discover" className={classes.dropdownLink}>
-              Apartments
-            </Link>,
-            <Link to="/discover" className={classes.dropdownLink}>
-              Hotels
-            </Link>
-          ]}
-        />
+        <Button
+          onClick={() => history.push('/discover')}
+          color="transparent"
+          target="_blank"
+          className={classes.navLink}
+        >
+          Experiences
+        </Button>
+      </ListItem>
+
+      <ListItem className={classes.listItem}>
+        <Button
+          onClick={() => history.push('/discover')}
+          color="transparent"
+          target="_blank"
+          className={classes.navLink}
+        >
+          Transfers
+        </Button>
       </ListItem>
 
       {currentUser ? (
         <ListItem className={classes.listItem}>
           <CustomDropdown
+            onClick={() => history.push()}
             left={false}
             caret={false}
-            hoverColor="black"
+            hoverColor="primary"
             dropdownHeader={
               <h6>
                 {currentUser.first_name} {currentUser.last_name}
               </h6>
             }
             buttonText={
-              <img src={profileImage} className={classes.img} alt="profile" />
+              <img
+                src={
+                  currentUser.profile_picture !== 'default'
+                    ? currentUser.profile_picture
+                    : profileImage
+                }
+                className={clsx(
+                  classes.avatar,
+                  classes.imgRounded,
+                  classes.imgRaised
+                )}
+                alt="avatar"
+              />
             }
             buttonProps={{
               className: `${classes.navLink} ${classes.imageDropdownButton}`,
@@ -132,8 +139,9 @@ const HeaderLinks = ({ ...props }) => {
               'Settings',
               <span
                 onClick={() => {
-                  history.push('/sign-in');
+                  console.log('Sign out clicked');
                   auth.signOut();
+                  history.push('/sign-in');
                 }}
               >
                 Sign out
@@ -143,15 +151,10 @@ const HeaderLinks = ({ ...props }) => {
         </ListItem>
       ) : (
         <ListItem className={classes.listItem}>
-          <Button
-            onClick={() => history.push('/sign-in')}
-            color="twitter"
-            target="_blank"
-            className={classes.registerNavLink}
-          >
+          <Link to="/sign-in" className={classes.navLink}>
             <ExitToApp className={classes.icons} />
             Get started
-          </Button>
+          </Link>
         </ListItem>
       )}
     </List>
@@ -177,8 +180,9 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
     display: 'block',
     width: 'auto',
-    margin: '0',
-    padding: '0',
+    marginLeft: 2,
+    marginRight: 2,
+    padding: 0,
     [theme.breakpoints.down('sm')]: {
       width: '100%',
       '&:after': {
@@ -267,13 +271,13 @@ const useStyles = makeStyles(theme => ({
     }
   },
   ...tooltip,
+  ...image,
   marginRight5: {
     marginRight: '5px'
   },
-  img: {
+  avatar: {
     width: '40px',
-    height: '40px',
-    borderRadius: '50%'
+    height: '40px'
   },
   imageDropdownButton: {
     padding: '0px',

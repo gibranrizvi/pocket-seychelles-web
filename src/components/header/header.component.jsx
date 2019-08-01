@@ -1,5 +1,6 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import clsx from 'clsx';
 
 import {
   container,
@@ -81,22 +82,22 @@ const Header = ({
   };
 
   const brandComponent = (
-    <Button
-      style={{ paddingBottom: 16 }}
-      onClick={() => history.push('/')}
-      className={classes.title}
-    >
+    <Link to="/" className={classes.title} style={{ paddingBottom: 16 }}>
       <h3 className={classes.brand}>
         <span style={{ fontWeight: 'bold' }}>POCKET</span>SEYCHELLES
       </h3>
-    </Button>
+    </Link>
   );
 
+  const appBarClasses = clsx({
+    [classes.appBar]: true,
+    [classes[color]]: color,
+    [classes.absolute]: absolute,
+    [classes.fixed]: fixed
+  });
+
   return (
-    <AppBar
-      className={`${classes.appBar} ${classes[color]} ${absolute &&
-        classes.absolute} ${fixed && classes.fixed}`}
-    >
+    <AppBar className={appBarClasses}>
       <Toolbar className={classes.container}>
         {leftLinks !== undefined ? brandComponent : null}
         <div className={classes.flex}>
@@ -141,7 +142,7 @@ const Header = ({
   );
 };
 
-export default withRouter(Header);
+export default Header;
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -279,6 +280,7 @@ const useStyles = makeStyles(theme => ({
     ...transition
   },
   brand: {
-    fontFamily: "'Caveat', cursive"
+    fontFamily: "'Caveat', cursive",
+    marginRight: 8
   }
 }));

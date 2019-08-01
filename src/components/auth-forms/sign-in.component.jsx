@@ -40,7 +40,7 @@ const SignInForm = ({ ...props }) => {
 
   return (
     <form onSubmit={handleSignInSubmit} className={classes.form}>
-      <CardHeader color="rose" className={classes.cardHeader}>
+      <CardHeader color="info" className={classes.cardHeader}>
         <h3>Sign in to get started</h3>
       </CardHeader>
 
@@ -59,6 +59,7 @@ const SignInForm = ({ ...props }) => {
           value={email}
           icon={<Face />}
           dense
+          required
         />
 
         <CustomInput
@@ -72,6 +73,7 @@ const SignInForm = ({ ...props }) => {
           onChange={e => setPassword(e.target.value)}
           value={password}
           dense
+          required
         />
       </CardBody>
       <CardFooter className={classes.cardFooter}>

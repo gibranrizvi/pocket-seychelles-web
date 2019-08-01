@@ -1,18 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
 
+import { signInWithGoogle } from 'firebase/firebase.utils';
+
 import { makeStyles } from '@material-ui/core/styles';
 import { Icon } from '@material-ui/core';
 
 import Button from 'components/custom-button/button.component';
 
-const SocialLogin = ({
-  signIn,
-  googlePressed,
-  googleLoading,
-  facebookPressed,
-  facebookLoading
-}) => {
+const SocialLogin = ({ signIn, googleLoading, facebookLoading }) => {
   const classes = useStyles();
 
   return (
@@ -24,11 +20,11 @@ const SocialLogin = ({
         }}
       >
         <Button
+          onClick={signInWithGoogle}
           variant="contained"
           size="sm"
           color="google"
           className={classes.button}
-          style={{ color: 'white' }}
         >
           <Icon
             className={clsx(
@@ -36,7 +32,6 @@ const SocialLogin = ({
               classes.iconSmall,
               'fab fa-google'
             )}
-            color="white"
             style={{ marginRight: 16 }}
           />
           {signIn ? 'Continue' : 'Sign up'} with Google
@@ -46,7 +41,6 @@ const SocialLogin = ({
           size="sm"
           color="facebook"
           className={classes.button}
-          style={{ color: 'white' }}
         >
           <Icon
             className={clsx(
@@ -54,7 +48,6 @@ const SocialLogin = ({
               classes.iconSmall,
               'fab fa-facebook-f'
             )}
-            color="white"
             style={{ marginRight: 16 }}
           />
           {signIn ? 'Continue' : 'Sign up'} with Facebook

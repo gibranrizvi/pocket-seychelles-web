@@ -26,6 +26,7 @@ const CustomInput = ({
   value,
   icon,
   dense,
+  required,
   error,
   white,
   success
@@ -44,6 +45,7 @@ const CustomInput = ({
       variant={variant}
       onChange={onChange}
       value={value}
+      required={required}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">
@@ -71,6 +73,7 @@ const CustomInput = ({
       variant={variant}
       onChange={onChange}
       value={value}
+      required={required}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">

@@ -13,8 +13,10 @@ import AuthPage from 'pages/auth/auth.component';
 import DiscoverPage from 'pages/discover/discover.component';
 import CategoryPage from 'pages/category/category.component';
 import DashboardPage from 'pages/dashboard/dashboard.component';
+import AboutPage from 'pages/about/about.component';
 
 import useAuth from 'hooks/useAuth';
+import TermsAndConditionsPage from 'pages/terms-conditions/terms-conditions.component';
 
 const App = () => {
   const currentUser = useAuth();
@@ -41,6 +43,12 @@ const App = () => {
           <Route exact path="/discover" component={DiscoverPage} />
           <Route exact path="/discover/:category" component={CategoryPage} />
           <Route exact path="/dashboard" component={DashboardPage} />
+          <Route exact path="/about" component={AboutPage} />
+          <Route
+            exact
+            path="/terms-conditions"
+            component={TermsAndConditionsPage}
+          />
         </Switch>
       </div>
     </FirebaseContext.Provider>
