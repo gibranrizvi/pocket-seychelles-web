@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { container } from 'assets/jss/material-kit-react.jsx';
+
 import { FirebaseContext } from '../../firebase/firebase.utils';
 
 // @material-ui/core components
-import withStyles from '@material-ui/core/styles/withStyles';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Footer from 'components/footer/footer.component';
 import GridContainer from 'components/grid/grid-container.component';
@@ -11,25 +13,18 @@ import GridItem from 'components/grid/grid-item.component';
 import Button from 'components/custom-button/button.component';
 import Card from 'components/card/card.component';
 
-import authPageStyle from './auth.styles';
-
 import image from 'assets/img/bg.jpg';
 
 import SignInForm from 'components/auth-forms/sign-in.component';
 import SignUpForm from 'components/auth-forms/sign-up.component';
 
-const AuthPage = ({ classes, ...props }) => {
+const AuthPage = ({ ...props }) => {
   const { currentUser } = React.useContext(FirebaseContext);
+
+  const classes = useStyles();
 
   const [cardAnimation, setCardAnimation] = React.useState('cardHidden');
   const [showLoginForm, setShowLoginForm] = React.useState(true);
-  const [checked, setChecked] = React.useState(false);
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
-  const [confirmPassword, setConfirmPassword] = React.useState('');
-  const [firstName, setFirstname] = React.useState('');
-  const [lastName, setLastName] = React.useState('');
-  const [pictureURI, setPictureURI] = React.useState('');
 
   const { history } = props;
 
@@ -43,17 +38,6 @@ const AuthPage = ({ classes, ...props }) => {
     }, 200);
     return () => {};
   }, [currentUser, history]);
-
-  const handleSignUpSubmit = event => {
-    event.preventDefault();
-
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
-    setFirstname('');
-    setLastName('');
-    setPictureURI('');
-  };
 
   return (
     <div
@@ -121,4 +105,92 @@ const AuthPage = ({ classes, ...props }) => {
   );
 };
 
-export default withStyles(authPageStyle)(AuthPage);
+export default AuthPage;
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    ...container,
+    zIndex: '2',
+    position: 'relative',
+    paddingTop: '20vh',
+    color: '#FFFFFF',
+    paddingBottom: '200px'
+  },
+  cardHidden: {
+    opacity: '0',
+    transform: 'translate3d(0, -60px, 0)'
+  },
+  pageHeader: {
+    minHeight: '100vh',
+    height: 'auto',
+    display: 'inherit',
+    position: 'relative',
+    margin: '0',
+    padding: '0',
+    border: '0',
+    alignItems: 'center',
+    '&:before': {
+      background: 'rgba(0, 0, 0, 0.5)'
+    },
+    '&:before,&:after': {
+      position: 'absolute',
+      zIndex: '1',
+      width: '100%',
+      height: '100%',
+      display: 'block',
+      left: '0',
+      top: '0',
+      content: '""'
+    },
+    '& footer li a,& footer li a:hover,& footer li a:active': {
+      color: '#FFFFFF'
+    },
+    '& footer': {
+      position: 'absolute',
+      bottom: '0',
+      width: '100%'
+    }
+  },
+  form: {
+    margin: '0'
+  },
+  cardHeader: {
+    width: 'auto',
+    textAlign: 'center',
+    marginLeft: '20px',
+    marginRight: '20px',
+    marginTop: '-40px',
+    padding: '20px 0',
+    marginBottom: '15px'
+  },
+  socialIcons: {
+    maxWidth: '24px',
+    marginTop: '0',
+    width: '100%',
+    transform: 'none',
+    left: '0',
+    top: '0',
+    height: '100%',
+    lineHeight: '41px',
+    fontSize: '20px'
+  },
+  divider: {
+    marginTop: '30px',
+    marginBottom: '0px',
+    textAlign: 'center'
+  },
+  cardFooter: {
+    paddingTop: '0rem',
+    border: '0',
+    borderRadius: '6px',
+    justifyContent: 'center !important'
+  },
+  socialLine: {
+    marginTop: '1rem',
+    textAlign: 'center',
+    padding: '0'
+  },
+  inputIconsColor: {
+    color: '#495057'
+  }
+}));

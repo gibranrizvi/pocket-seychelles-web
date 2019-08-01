@@ -10,6 +10,9 @@ import HeaderLinks from 'components/header-links/header-links.component';
 
 import LandingPage from 'pages/landing/landing.component';
 import AuthPage from 'pages/auth/auth.component';
+import DiscoverPage from 'pages/discover/discover.component';
+import CategoryPage from 'pages/category/category.component';
+import DashboardPage from 'pages/dashboard/dashboard.component';
 
 import useAuth from 'hooks/useAuth';
 
@@ -35,12 +38,9 @@ const App = () => {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/sign-in" component={AuthPage} />
-          <Route exact path="/discover" component={AuthPage} />
-          <Route exact path="/hotels" component={AuthPage} />
-          <Route exact path="/villas" component={AuthPage} />
-          <Route exact path="/guesthouses" component={AuthPage} />
-          <Route exact path="/apartments" component={AuthPage} />
-          <Route exact path="/dashboard" component={AuthPage} />
+          <Route exact path="/discover" component={DiscoverPage} />
+          <Route exact path="/discover/:category" component={CategoryPage} />
+          <Route exact path="/dashboard" component={DashboardPage} />
         </Switch>
       </div>
     </FirebaseContext.Provider>

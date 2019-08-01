@@ -26,17 +26,6 @@ const HeaderLinks = ({ ...props }) => {
   return left ? (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
-        <Button
-          onClick={() => history.push('/discover')}
-          color="transparent"
-          target="_blank"
-          className={classes.navLink}
-        >
-          Discover
-        </Button>
-      </ListItem>
-
-      {/* <ListItem className={classes.listItem}>
         <Tooltip
           id="instagram-facebook"
           title="Follow us on facebook"
@@ -70,22 +59,46 @@ const HeaderLinks = ({ ...props }) => {
             <i className={classes.socialIcons + ' fab fa-instagram'} />
           </Button>
         </Tooltip>
-      </ListItem> */}
+      </ListItem>
     </List>
   ) : (
     <List className={classes.list}>
       <ListItem className={classes.listItem}>
+        <Button
+          onClick={() => history.push('/discover')}
+          color="transparent"
+          target="_blank"
+          className={classes.navLink}
+        >
+          Discover
+        </Button>
+      </ListItem>
+
+      <ListItem className={classes.listItem}>
         <CustomDropdown
           noLiPadding
-          buttonText="Components"
+          buttonText="Discover"
           buttonProps={{
             className: classes.navLink,
-            color: 'transparent'
+            color: 'transparent',
+            onClick: () => history.push('/discover')
           }}
           buttonIcon={Apps}
           dropdownList={[
-            <Link to="/" className={classes.dropdownLink}>
-              All components
+            <Link to="/discover" className={classes.dropdownLink}>
+              Hotels
+            </Link>,
+            <Link to="/discover" className={classes.dropdownLink}>
+              Villas
+            </Link>,
+            <Link to="/discover" className={classes.dropdownLink}>
+              Guesthouses
+            </Link>,
+            <Link to="/discover" className={classes.dropdownLink}>
+              Apartments
+            </Link>,
+            <Link to="/discover" className={classes.dropdownLink}>
+              Hotels
             </Link>
           ]}
         />

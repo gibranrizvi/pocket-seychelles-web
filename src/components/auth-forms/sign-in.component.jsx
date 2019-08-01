@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import {
   createUserProfileDocument,
@@ -8,9 +7,8 @@ import {
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import { TextField, InputAdornment, IconButton } from '@material-ui/core';
 
-import { Face, Visibility, VisibilityOff } from '@material-ui/icons';
+import { Face } from '@material-ui/icons';
 
 import CustomInput from 'components/custom-input/custom-input.component';
 import Button from 'components/custom-button/button.component';

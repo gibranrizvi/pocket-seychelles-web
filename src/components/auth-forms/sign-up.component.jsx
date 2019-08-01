@@ -1,5 +1,4 @@
 import React from 'react';
-import clsx from 'clsx';
 
 import {
   createUserProfileDocument,
@@ -8,17 +7,9 @@ import {
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core/styles';
-import {
-  TextField,
-  InputAdornment,
-  IconButton,
-  Checkbox,
-  FormControlLabel
-} from '@material-ui/core';
+import { Checkbox, FormControlLabel } from '@material-ui/core';
 
 import Check from '@material-ui/icons/Check';
-
-import { Face, Visibility, VisibilityOff } from '@material-ui/icons';
 
 import GridContainer from 'components/grid/grid-container.component';
 import GridItem from 'components/grid/grid-item.component';
@@ -100,7 +91,6 @@ const SignUpForm = ({ ...props }) => {
               variant="outlined"
               onChange={e => setValues({ ...values, email: e.target.value })}
               value={email}
-              icon={<Face />}
               dense
             />
 
