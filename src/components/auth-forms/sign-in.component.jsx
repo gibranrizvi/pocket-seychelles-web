@@ -13,7 +13,6 @@ import { Face } from '@material-ui/icons';
 import CustomInput from 'components/custom-input/custom-input.component';
 import Button from 'components/custom-button/button.component';
 import CardBody from 'components/card/card-body.component';
-import CardHeader from 'components/card/card-header.component';
 import CardFooter from 'components/card/card-footer.component';
 import SocialLogin from 'components/social-login/social-login.component';
 

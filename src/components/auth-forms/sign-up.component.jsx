@@ -155,8 +155,11 @@ const SignUpForm = ({ ...props }) => {
         <h2>Create your new account</h2>
       </div>
 
-      <GridContainer justify="center">
-        <GridItem xs={12} sm={10} md={6} lg={6} xl={6}>
+      <GridContainer
+        justify="center"
+        style={{ maxHeight: 400, overflow: 'auto' }}
+      >
+        <GridItem xs={10} sm={10} md={6} lg={6} xl={6}>
           <CardBody>
             <SocialLogin />
 
@@ -217,7 +220,7 @@ const SignUpForm = ({ ...props }) => {
             />
           </CardBody>
         </GridItem>
-        <GridItem xs={12} sm={10} md={6} lg={6} xl={6}>
+        <GridItem xs={10} sm={10} md={6} lg={6} xl={6}>
           <CardBody>
             <CustomInput
               name="firstName"
