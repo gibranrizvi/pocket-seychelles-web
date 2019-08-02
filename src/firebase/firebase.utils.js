@@ -1,6 +1,7 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
+import 'firebase/storage';
 import FirebaseContext from './firebase.context';
 
 const config = {
@@ -14,8 +15,60 @@ const config = {
 };
 
 // Upload picture to Firebase storage and get a download URL
-export const uploadProfilePicture = async () => {
-  console.log('Uploading to firebase storage');
+export const uploadProfilePicture = async (
+  uid,
+  email,
+  firstName,
+  lastName,
+  pictureURI
+) => {
+  const file = pictureURI;
+
+  const metadata = {
+    contentType: 'image/jpeg'
+  };
+
+  const pictureRef = storage
+    .ref()
+    .child(`profile_pictures/${firstName}_${lastName}_${uid}`);
+
+  try {
+    const uploadTask = pictureRef.put(file, metadata);
+
+    await uploadTask.on(
+      'state_changed',
+      snapshot => {
+        // var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        // console.log('Upload is ' + progress + '% done');
+        // switch (snapshot.state) {
+        //   case 'paused': // or 'paused'
+        //     console.log('Upload is paused');
+        //     break;
+        //   case 'running': // or 'running'
+        //     console.log('Upload is running');
+        //     break;
+        // }
+      },
+      error => {
+        console.log(error);
+      },
+      async () => {
+        // Upload complete
+        const downloadURL = await uploadTask.snapshot.ref.getDownloadURL();
+        const userData = {
+          uid,
+          email,
+          first_name: firstName,
+          last_name: lastName,
+          profile_picture: downloadURL
+        };
+
+        return await createUserProfileDocument(userData);
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 // Saving new user or updating existing user in Firestore
@@ -67,6 +120,7 @@ firebase.initializeApp(config);
 // Export Auth and Firestore services
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
+export const storage = firebase.storage();
 export { FirebaseContext };
 
 // Google OAuth set up

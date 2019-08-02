@@ -26,6 +26,7 @@ const CustomInput = ({
   type,
   label,
   placeholder,
+  capitalize,
   margin,
   fullWidth,
   variant,
@@ -80,6 +81,7 @@ const CustomInput = ({
           [classes.dense]: dense,
           [classes.underlineSuccess]: success
         })}
+        style={{ textTransform: 'capitalize' }}
       />
       {errorMessage && (
         <FormHelperText className={classes.errorMessage}>
@@ -113,8 +115,7 @@ const CustomInput = ({
         className={clsx({
           [classes.textField]: true,
           [classes.dense]: dense,
-          [classes.underline]: success,
-          [classes.underlineSuccess]: success
+          [classes.capitalize]: capitalize
         })}
       />
       {errorMessage && (
@@ -229,5 +230,8 @@ const useStyles = makeStyles(theme => ({
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
     fontWeight: '400',
     margin: 4
+  },
+  capitalize: {
+    textTransform: 'capitalize'
   }
 }));

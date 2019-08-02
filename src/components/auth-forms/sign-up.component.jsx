@@ -18,7 +18,7 @@ import {
 import { makeStyles } from '@material-ui/core/styles';
 import { Checkbox, FormControlLabel, IconButton } from '@material-ui/core';
 
-import { Check, AddAPhotoOutlined } from '@material-ui/icons';
+import { Check, AddAPhotoTwoTone } from '@material-ui/icons';
 
 import GridContainer from 'components/grid/grid-container.component';
 import GridItem from 'components/grid/grid-item.component';
@@ -106,12 +106,6 @@ const SignUpForm = ({ ...props }) => {
     setErrors({});
     setSubmitting(true);
 
-    let downloadLink;
-
-    if (pictureURI) {
-      downloadLink = await uploadProfilePicture(pictureURI);
-    }
-
     try {
       const { user } = await auth.createUserWithEmailAndPassword(
         email,
@@ -121,32 +115,44 @@ const SignUpForm = ({ ...props }) => {
       if (!user) return;
       else {
         const { uid, email } = user;
+
+        if (pictureURI) {
+          return await uploadProfilePicture(
+            uid,
+            email,
+            firstName,
+            lastName,
+            pictureURI
+          );
+        }
+
         const userData = {
           uid,
           email,
           first_name: firstName,
           last_name: lastName,
-          profile_picture: pictureURI ? downloadLink : 'default'
+          profile_picture: 'default'
         };
 
-        await createUserProfileDocument(userData);
+        return await createUserProfileDocument(userData);
       }
     } catch (error) {
       console.log(error);
+      setSubmitting(false);
       return setErrors({
-        email: 'Email already exists'
+        email: 'Email already in use'
       });
     }
   };
 
   return (
     <form
-      onSubmit={submitting ? null : handleSignUpSubmit}
+      onSubmit={submitting ? e => e.preventDefault() : handleSignUpSubmit}
       className={classes.form}
       noValidate
     >
       <div style={{ display: 'flex', justifyContent: 'center' }}>
-        <h2>Create a new account</h2>
+        <h2>Create your new account</h2>
       </div>
 
       <GridContainer justify="center">
@@ -247,14 +253,13 @@ const SignUpForm = ({ ...props }) => {
               errorMessage={errors.lastName}
             />
 
-            {/* TODO add picture selector */}
             <div
               style={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 marginTop: 4,
-                marginLeft: -12
+                marginLeft: -16
               }}
             >
               <input
@@ -269,14 +274,14 @@ const SignUpForm = ({ ...props }) => {
               <label htmlFor="image">
                 <IconButton aria-label="upload picture" component="span">
                   {pictureURI ? (
-                    <Check className={classes.uploadedCheckIcon} />
+                    <AddAPhotoTwoTone className={classes.imageSelectedIcon} />
                   ) : (
-                    <AddAPhotoOutlined className={classes.uploadImageIcon} />
+                    <AddAPhotoTwoTone className={classes.uploadImageIcon} />
                   )}
                 </IconButton>
               </label>
               <p style={{ marginLeft: 4, marginTop: 10 }}>
-                Upload a profile picture (optional)
+                Choose a profile picture (optional)
               </p>
             </div>
           </CardBody>
@@ -386,5 +391,5 @@ const useStyles = makeStyles(theme => ({
   imageInput: { display: 'none' },
   checkedIcon: { color: dangerColor },
   uploadImageIcon: { color: twitterColor },
-  uploadedCheckIcon: { color: successColor }
+  imageSelectedIcon: { color: successColor }
 }));

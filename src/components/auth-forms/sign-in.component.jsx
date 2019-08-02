@@ -55,6 +55,7 @@ const SignInForm = ({ ...props }) => {
       return createUserProfileDocument({ uid: user.uid });
     } catch (error) {
       console.log(error);
+      setSubmitting(false);
       return setErrors({
         general: 'Incorrect email address or password'
       });
@@ -63,7 +64,11 @@ const SignInForm = ({ ...props }) => {
 
   // Return statement
   return (
-    <form onSubmit={handleSignInSubmit} className={classes.form} noValidate>
+    <form
+      onSubmit={submitting ? e => e.preventDefault() : handleSignInSubmit}
+      className={classes.form}
+      noValidate
+    >
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <h2>Sign in</h2>
       </div>
@@ -107,7 +112,7 @@ const SignInForm = ({ ...props }) => {
         />
       </CardBody>
       <CardFooter className={classes.cardFooter}>
-        <Button type="submit" color="twitter" size="lg">
+        <Button type="submit" color="twitter" size="md">
           {submitting ? 'One moment please' : 'Sign in'}
         </Button>
       </CardFooter>
