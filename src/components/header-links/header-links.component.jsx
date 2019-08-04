@@ -10,7 +10,7 @@ import { Link, withRouter } from 'react-router-dom';
 
 // @material-ui/core components
 import { makeStyles } from '@material-ui/core';
-import { List, ListItem, Tooltip } from '@material-ui/core';
+import { List, ListItem, Tooltip, Hidden } from '@material-ui/core';
 
 // @material-ui/icons
 import { ExitToApp } from '@material-ui/icons';
@@ -102,48 +102,52 @@ const HeaderLinks = ({ ...props }) => {
 
       {currentUser ? (
         <ListItem className={classes.listItem}>
-          <Button
-            onClick={() => auth.signOut()}
-            color="transparent"
-            className={classes.navLink}
-          >
-            Sign out
-          </Button>
-          {/* <CustomDropdown
-            dropup={false}
-            left={true}
-            caret={false}
-            hoverColor="danger"
-            dropdownHeader={
-              <h6>
-                {currentUser.first_name} {currentUser.last_name}
-              </h6>
-            }
-            buttonText={
-              <img
-                src={
-                  currentUser.profile_picture !== 'default'
-                    ? currentUser.profile_picture
-                    : profileImage
-                }
-                className={clsx(
-                  classes.avatar,
-                  classes.imgRounded,
-                  classes.imgRaised
-                )}
-                alt="avatar"
-              />
-            }
-            buttonProps={{
-              className: `${classes.navLink} ${classes.imageDropdownButton}`,
-              color: 'transparent'
-            }}
-            dropdownList={[
-              'Profile',
-              'Settings',
-              <span onClick={() => auth.signOut()}>Sign out</span>
-            ]}
-          /> */}
+          <Hidden mdUp>
+            <Button
+              onClick={() => auth.signOut()}
+              color="transparent"
+              className={classes.navLink}
+            >
+              Sign out
+            </Button>
+          </Hidden>
+          <Hidden smDown>
+            <CustomDropdown
+              dropup={false}
+              left={true}
+              caret={false}
+              hoverColor="danger"
+              dropdownHeader={
+                <h6>
+                  {currentUser.first_name} {currentUser.last_name}
+                </h6>
+              }
+              buttonText={
+                <img
+                  src={
+                    currentUser.profile_picture !== 'default'
+                      ? currentUser.profile_picture
+                      : profileImage
+                  }
+                  className={clsx(
+                    classes.avatar,
+                    classes.imgRounded,
+                    classes.imgRaised
+                  )}
+                  alt="avatar"
+                />
+              }
+              buttonProps={{
+                className: clsx(classes.navLink, classes.imageDropdownButton),
+                color: 'transparent'
+              }}
+              dropdownList={[
+                'Profile',
+                'Settings',
+                <div onClick={() => auth.signOut()}>Sign out</div>
+              ]}
+            />
+          </Hidden>
         </ListItem>
       ) : (
         <ListItem className={classes.listItem}>
@@ -221,7 +225,7 @@ const useStyles = makeStyles(theme => ({
       marginTop: '8px',
       textAlign: 'left',
       '& > span:first-child': {
-        justifyContent: 'flex-start'
+        justifyContent: 'center'
       }
     }
   },

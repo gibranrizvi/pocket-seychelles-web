@@ -133,8 +133,8 @@ const Header = ({
           onClose={handleDrawerToggle}
         >
           <div className={classes.appResponsive}>
-            {leftLinks}
             {rightLinks}
+            {leftLinks}
           </div>
         </Drawer>
       </Hidden>
